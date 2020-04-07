@@ -36,6 +36,10 @@ export default class LoadingScene extends Scene {
       frameWidth: 16,
       frameHeight: 19
     });
+    this.load.spritesheet("rainSplash", "../assets/rainSplash.png", {
+      frameWidth: 16,
+      frameHeight: 16
+    });
   }
 
   // The rest of this file makes the visual loading bar work!

@@ -1,7 +1,5 @@
 import Player from "./Player.js";
 
-import EvilTroop from "./actor/EvilTroop.js";
-
 export default class ComputerPlayer extends Player {
   constructor(scene) {
     const gameWidth = scene.game.config.width;

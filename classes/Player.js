@@ -2,14 +2,15 @@ import Phaser from "phaser";
 
 import ManaBank from "../classes/ManaBank.js";
 import Tower from "../classes/environment/Tower.js";
-import Troop from "../classes/actor/Troop.js";
-import EvilTroop from "../classes/actor/Troop.js";
+import EvilTroop from "../classes/actor/EvilTroop.js";
 
 export default class Player {
   constructor(scene, spawnZoneX, spawnZoneY, towerX, towerY, opponent) {
     this.scene = scene;
 
-    this.npcs = [];
+    //this.troops = [];
+    this.troops = scene.physics.add.group();
+    this.aggroAreas = scene.physics.add.group();
     this.opponent = opponent;
 
     const gameWidth = scene.game.config.width;
@@ -44,7 +45,7 @@ export default class Player {
           y,
           velocityDirection
         );
-        this.npcs.push(thisTroop);
+        //this.troops.push(thisTroop);
         console.log("before collider");
         // Set up collision with tower
         this.scene.physics.add.collider(

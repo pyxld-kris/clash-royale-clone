@@ -6,8 +6,24 @@ export default class Troop extends Character {
     super(scene, x, y, imageKey, velocityDirection);
     this.scene = scene;
     this.owner = owner; // A Player object
+    this.enemyTroop = null;
+
+    console.log("velocityDirection", velocityDirection);
 
     try {
+      console.log(1);
+      // <Aggression zone stuff>
+      this.aggroArea = scene.physics.add
+        .existing(scene.add.rectangle(x, y, 60, 60, 0xff0000, 0.1))
+        .setDepth(100);
+      //this.aggroArea.troop = this;
+      // </Aggression zone stuff>
+      console.log(2);
+
+      this.owner.troops.add(this);
+      this.owner.aggroAreas.add(this.aggroArea);
+      console.log(3);
+
       this.setTint(0x555599);
 
       this.setFriction(10)
@@ -16,25 +32,22 @@ export default class Troop extends Character {
         .setBounce(0.5);
 
       this.generateAnimations();
-
-      this.aggroArea = scene.add
-        .rectangle(x, y, 60, 60, 0xff0000, 0.5)
-        .setDepth(100);
-
-      // hook into the scene's update function
-      this.scene.events.on("update", this.update, this);
-
       this.setAcceleration(0, 50 * velocityDirection);
+
       this.anims.play("npc-back", true);
       if (velocityDirection > 0) this.anims.play("npc-front", true);
       scene.physics.add.collider(this, scene.trees);
-      scene.physics.add.collider(this, scene.player.npcs);
-      scene.physics.add.collider(this, scene.opponent.npcs);
+      scene.physics.add.collider(this, scene.player.troops);
+      scene.physics.add.collider(this, scene.opponent.troops);
 
       // TODO: Use phaser built in timer
       setTimeout(() => {
         this.destroy();
       }, 10000);
+
+      Troop.pointers.push(this); // add a pointer to later reference all Troop instances
+
+      //console.log("Troop.pointers", Troop.pointers);
     } catch (e) {
       console.error(e);
       throw e;
@@ -64,47 +77,33 @@ export default class Troop extends Character {
     });
     this.anims.play("npc-front", true); // default starting anim
   }
+  /*
+  canAttack() {
+    return this.enemyTroop ? false : true;
+  }
+  startAttacking(troop) {
+    if (!this.enemyTroop) {
+      this.enemyTroop = troop;
 
-  update(time, delta) {
-    this.aggroArea.setPosition(this.x, this.y);
-    /*
-    if (parseInt(time, 0) % 10 === 0) {
-      console.log("do move npc");
-      // every 1 second
-      let rand = Math.random();
-      if (rand < 0.1) {
-        this.setVelocityY(-50);
-        this.anims.play("npc-back", true);
-      } else if (rand < 0.2) {
-        this.setVelocityY(50);
-        this.anims.play("npc-front", true);
-      } else if (rand < 0.3) {
-        this.setVelocityX(-50);
-        this.anims.play("npc-side", true);
-        this.setFlipX(true);
-      } else if (rand < 0.4) {
-        this.setVelocityX(50);
-        this.anims.play("npc-side", true);
-        this.setFlipX(false);
-      } else {
-        this.setVelocity(0);
-      }
-      
-
-      // Keep this image visually correct
+      this.setAcceleration(0, 0);
+      this.scene.physics.accelerateTo(this, troop.x, troop.y, 100);
+      this.accelerateTo(this, troop, 100);
     }
-    */
-
+  }
+  */
+  // TODO: make sure this is working!
+  preUpdate() {
+    this.aggroArea.setPosition(this.x, this.y);
     this.setDepth(this.y);
   }
 
   destroy() {
-    if (this.scene)
-      // sometimes scene is undefined when in the process of restarting?
-      this.scene.events.off("update", this.update, this);
-
     this.aggroArea.destroy();
+
+    Troop.pointers.splice(Troop.pointers.indexOf(this), 1);
 
     super.destroy();
   }
 }
+
+Troop.pointers = [];

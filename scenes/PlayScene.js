@@ -8,6 +8,8 @@ import TreeTrunk from "../classes/environment/TreeTrunk.js";
 import Rock from "../classes/environment/Rock.js";
 import Grass from "../classes/environment/Grass.js";
 
+import WeatherSystem from "../weather";
+
 export default class PlayScene extends Phaser.Scene {
   constructor() {
     super("PlayScene");
@@ -49,6 +51,28 @@ export default class PlayScene extends Phaser.Scene {
 
     this.player.setOpponent(this.opponent);
     this.opponent.setOpponent(this.player);
+    /*
+    this.physics.add.overlap(
+      this.opponent.aggroAreas,
+      this.player.troops,
+      (aggroArea, enemyTroop) => {
+        let thisTroop = aggroArea.troop;
+        if (thisTroop.canAttack()) {
+          thisTroop.setScale(2);
+          thisTroop.startAttacking(enemyTroop);
+        }
+      }
+    );
+    */
+    /*
+    this.physics.add.overlap(
+      this.player.aggroAreas,
+      this.opponent.troops,
+      (aggroArea, enemyTroop) => {
+        console.log("WE OVERLAPPED!");
+      }
+    );
+    */
 
     /*
     this.myTower = new Tower(this, halfGameWidth, worldHeight - 10);
@@ -62,6 +86,7 @@ export default class PlayScene extends Phaser.Scene {
       .setOrigin(0, 0);
 */
     this.generateTerrain();
+    this.weather = new WeatherSystem(this);
     //this.manaBank = new ManaBank(this);
   }
 
