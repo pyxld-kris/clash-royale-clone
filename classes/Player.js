@@ -1,23 +1,26 @@
 import Phaser from "phaser";
 
-import ManaBank from "../classes/ManaBank.js";
+import ManaBank from "./ManaBank.js";
 import Tower from "../classes/environment/Tower.js";
-import EvilTroop from "../classes/actor/EvilTroop.js";
-import LilDemonTroop from "../classes/actor/LilDemonTroop.js";
 
-export default class Player {
+import { Troops } from './troops';
+
+import {
+  gameWidth, gameHeight,
+  halfGameWidth, halfGameHeight
+} from '../constants';
+
+const spawnTypes = [EvilTroop, LilDemonTroop];
+
+// scene, spawnZoneX, spawnZoneY, towerX, towerY, opponent
+
+class Player {
   constructor(scene, spawnZoneX, spawnZoneY, towerX, towerY, opponent) {
     this.scene = scene;
 
-    //this.troops = [];
+    this.opponent = opponent;
     this.troops = scene.physics.add.group();
     this.aggroAreas = scene.physics.add.group();
-    this.opponent = opponent;
-
-    const gameWidth = scene.game.config.width;
-    const gameHeight = scene.game.config.height;
-    const halfGameWidth = gameWidth / 2;
-    const halfGameHeight = gameHeight / 2;
 
     this.tower = new Tower(scene, this, towerX, towerY);
 
@@ -36,54 +39,32 @@ export default class Player {
   spawnTroop(x, y, cost, velocityDirection) {
     // First, let's check if this click falls within our boundaries
 
-    if (Phaser.Geom.Rectangle.Contains(this.spawnZone, x, y)) {
-      console.log("adding troop");
-      if (this.manaBank.getManaAmount() >= cost) {
-        console.log("before spawn types");
-        const spawnTypes = [
-          {
-            class: EvilTroop,
-            numToSpawn: 1
-          },
-          {
-            class: LilDemonTroop,
-            numToSpawn: 2
-          }
-        ];
-        console.log("before random troop");
-        let thisTroopData =
-          spawnTypes[parseInt(Math.random() * spawnTypes.length, 0)];
-        let troopType = thisTroopData.class;
-        console.log("before loop");
-        for (let i = 0; i < thisTroopData.numToSpawn; i++) {
-          console.log("in loop");
-          const thisTroop = new troopType(
-            this.scene,
-            this,
-            x + i * 10,
-            y,
-            velocityDirection
-          );
+    if (!Phaser.Geom.Rectangle.Contains(this.spawnZone, x, y)) return;
 
-          //this.troops.push(thisTroop);
-          console.log("before collider");
-          // Set up collision with tower
-          this.scene.physics.add.collider(
-            thisTroop,
-            this.opponent.tower,
-            (troop, tower) => {
-              tower.doDamage(1);
-            }
-          );
-        }
-        console.log("before deduct");
-        //new Rock(this, x, y);
-        this.manaBank.deductMana(cost);
-      }
+    if (this.manaBank.getManaAmount() < cost) return;
+
+    console.log("before random troop");
+    let thisTroopData =
+      spawnTypes[parseInt(Math.random() * spawnTypes.length, 0)];
+    let troopType = thisTroopData.class;
+    console.log("before loop");
+    for (let i = 0; i < thisTroopData.numToSpawn; i++) {
+      console.log("in loop");
+      const thisTroop = new troopType(
+        this.scene,
+        this,
+        x + i * 10,
+        y,
+        velocityDirection
+      );
+
     }
+    console.log("before deduct");
+
+    this.manaBank.deductMana(cost);
   }
 
-  destroy() {
-    super.destroy();
-  }
+  destroy() {}
 }
+
+export default Player;

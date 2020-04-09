@@ -1,8 +1,9 @@
-export default class ManaBank {
+
+class ManaBank {
   constructor(scene, renderX, renderY) {
     this.scene = scene;
     this.manaAmount = 0;
-    console.log("befopre this");
+
     this.displayText = scene.add
       .text(renderX, renderY, this.manaAmount, {
         fontSize: "8px",
@@ -10,14 +11,17 @@ export default class ManaBank {
       })
       .setOrigin(0.5, 0.5)
       .setScrollFactor(0)
-      .setDepth(999999999);
+      .setDepth(1);
 
-    console.log("before that");
 
     this.renderMana();
-    setInterval(() => {
-      this.incrementMana();
-    }, 1000);
+
+    scene.time.addEvent({
+      delay: 1000,
+      loo: true,
+      callback: this.incrementMana,
+      callbackScope: this
+    });
   }
 
   getManaAmount() {
@@ -44,3 +48,5 @@ export default class ManaBank {
     super.destroy();
   }
 }
+
+export default ManaBank;
