@@ -51,43 +51,35 @@ export default class PlayScene extends Phaser.Scene {
 
     this.player.setOpponent(this.opponent);
     this.opponent.setOpponent(this.player);
-    /*
+
+    // Set up opponent troops attacking player troops
     this.physics.add.overlap(
       this.opponent.aggroAreas,
       this.player.troops,
       (aggroArea, enemyTroop) => {
         let thisTroop = aggroArea.troop;
-        if (thisTroop.canAttack()) {
-          thisTroop.setScale(2);
-          thisTroop.startAttacking(enemyTroop);
-        }
+        this.initiateTroopAttack(thisTroop, enemyTroop);
       }
     );
-    */
-    /*
+
+    // Set up player troops attacking opponent troops
     this.physics.add.overlap(
       this.player.aggroAreas,
       this.opponent.troops,
       (aggroArea, enemyTroop) => {
-        console.log("WE OVERLAPPED!");
+        let thisTroop = aggroArea.troop;
+        this.initiateTroopAttack(thisTroop, enemyTroop);
       }
     );
-    */
 
-    /*
-    this.myTower = new Tower(this, halfGameWidth, worldHeight - 10);
-    this.mySpawnZone = this.add
-      .rectangle(0, halfGameHeight, gameWidth, halfGameHeight, 0x0000ff, 1)
-      .setOrigin(0, 0);
-
-    this.opponentTower = new Tower(this, halfGameWidth, 30);
-    this.opponentSpawnZone = this.add
-      .rectangle(0, 0, gameWidth, halfGameHeight, 0xff0000, 1)
-      .setOrigin(0, 0);
-*/
     this.generateTerrain();
     this.weather = new WeatherSystem(this);
-    //this.manaBank = new ManaBank(this);
+  }
+
+  initiateTroopAttack(attacker, target) {
+    if (attacker.canAttack()) {
+      attacker.startAttacking(target);
+    }
   }
 
   generateTerrain() {

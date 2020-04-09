@@ -10,7 +10,8 @@ export default class EnvironmentObject extends Phaser.Physics.Arcade.Sprite {
 
     if (isPhysical) {
       // Add to physics engine
-      scene.physics.add.existing(this, true); // second parameter is isStatic
+      scene.physics.add.existing(this, false); // second parameter is isStatic
+      this.body.setImmovable(true);
 
       // Fix the hitbox of this physics object
       const width = this.width;

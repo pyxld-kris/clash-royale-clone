@@ -1,8 +1,9 @@
 import EnvironmentObject from "./EnvironmentObject.js";
 
 export default class Tower extends EnvironmentObject {
-  constructor(scene, x, y) {
+  constructor(scene, owner, x, y) {
     super(scene, x, y, "tower", true, -6);
+    this.owner = owner;
 
     this.health = 1000;
 
@@ -13,6 +14,10 @@ export default class Tower extends EnvironmentObject {
       .setDepth(999999); //.setOffset(0.5, 1);
 
     this.setTint(0x885500);
+
+    // Add towers to troop groups to allow troops to attack towers
+    this.owner.troops.add(this);
+    this.body.setImmovable(true);
   }
 
   doDamage(amount) {
@@ -26,6 +31,7 @@ export default class Tower extends EnvironmentObject {
   }
 
   destroy() {
+    this.isDestroyed = true;
     this.healthDisplay.destroy();
     super.destroy();
   }

@@ -36,6 +36,14 @@ export default class LoadingScene extends Scene {
       frameWidth: 16,
       frameHeight: 19
     });
+    this.load.spritesheet(
+      "troop--lil-demon",
+      "../assets/troop--lil-demon.png",
+      {
+        frameWidth: 16,
+        frameHeight: 19
+      }
+    );
     this.load.spritesheet("rainSplash", "../assets/rainSplash.png", {
       frameWidth: 16,
       frameHeight: 16

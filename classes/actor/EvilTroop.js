@@ -5,6 +5,8 @@ export default class EvilTroop extends Troop {
   constructor(scene, owner, x, y, velocityDirection) {
     super(scene, owner, x, y, "troop--evil", velocityDirection);
 
+    this.animKeyPrefix = "troop--evil";
+
     this.generateAnimations();
 
     this.setTint(0xffffff);
@@ -15,24 +17,24 @@ export default class EvilTroop extends Troop {
     // Create the animations we need from the player spritesheet
     const anims = this.scene.anims;
     anims.create({
-      key: "npc-front",
+      key: "troop--evil--front",
       frames: anims.generateFrameNumbers("troop--evil", { start: 0, end: 0 }),
       frameRate: 3,
       repeat: -1
     });
     anims.create({
-      key: "npc-back",
+      key: "troop--evil--back",
       frames: anims.generateFrameNumbers("troop--evil", { start: 1, end: 1 }),
       frameRate: 12,
       repeat: -1
     });
     anims.create({
-      key: "npc-side",
+      key: "troop--evil--side",
       frames: anims.generateFrameNumbers("troop--evil", { start: 2, end: 2 }),
       frameRate: 12,
       repeat: -1
     });
-    this.anims.play("troop--evil", true); // default starting anim
+    this.anims.play("troop--evil--front", true); // default starting anim
   }
 
   destroy() {
