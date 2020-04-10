@@ -64,7 +64,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
     // default starting anim
     this.anims.play(`${this.animKeyPrefix}--front`, true);
 
-    scene.time.delayedCall(10000, this.destroy);
+    scene.time.delayedCall(10000, this.destroy, null, this);
   }
 
   doDamage(amount) {
