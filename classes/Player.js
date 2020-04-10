@@ -3,14 +3,31 @@ import Phaser from "phaser";
 import ManaBank from "./ManaBank.js";
 import Tower from "../classes/environment/Tower.js";
 
-import { Troops } from './troops';
+import { Walkers } from './troops';
 
 import {
   gameWidth, gameHeight,
   halfGameWidth, halfGameHeight
 } from '../constants';
 
-const spawnTypes = [EvilTroop, LilDemonTroop];
+const cardTypes = [
+  {
+    name: 'EvilTroop',
+    spawn: (config) => {
+      new Walkers.EvilTroop(config);
+    }
+  },
+  {
+    name: 'LilDemonTroop',
+    spawn: (config) => {
+      Walkers.LilDemonTroop(config);
+      Walkers.LilDemonTroop({
+        ...config,
+        x: config.x + 10
+      });
+    }
+  }
+];
 
 // scene, spawnZoneX, spawnZoneY, towerX, towerY, opponent
 
@@ -37,30 +54,20 @@ class Player {
   }
 
   spawnTroop(x, y, cost, velocityDirection) {
-    // First, let's check if this click falls within our boundaries
 
+    // First, let's check if this click falls within our boundaries.
     if (!Phaser.Geom.Rectangle.Contains(this.spawnZone, x, y)) return;
 
+    // Secondly, check if we have enough mana.
     if (this.manaBank.getManaAmount() < cost) return;
 
-    console.log("before random troop");
-    let thisTroopData =
-      spawnTypes[parseInt(Math.random() * spawnTypes.length, 0)];
-    let troopType = thisTroopData.class;
-    console.log("before loop");
-    for (let i = 0; i < thisTroopData.numToSpawn; i++) {
-      console.log("in loop");
-      const thisTroop = new troopType(
-        this.scene,
-        this,
-        x + i * 10,
-        y,
-        velocityDirection
-      );
+    // get a random card type, in the future this will be dicided by the player.
+    const CardType = spawnTypes[parseInt(Math.random() * spawnTypes.length, 0)];
 
-    }
-    console.log("before deduct");
+    // then spawn the troop
+    CardType.spawn({ scene: this.scene, owner: this, x, y, velocityDirection });
 
+    // and remove mana equal to it's cost.
     this.manaBank.deductMana(cost);
   }
 

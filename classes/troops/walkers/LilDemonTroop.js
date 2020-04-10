@@ -10,10 +10,6 @@ class LilDemonTroop extends Troop {
     this.setTint(0xffffff);
   }
 
-  spawn() {
-
-  }
-
   destroy() {
     super.destroy();
   }

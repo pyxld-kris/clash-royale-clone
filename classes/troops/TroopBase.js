@@ -2,7 +2,7 @@ import Phaser from "phaser";
 
 // scene, owner, x, y, velocityDirection, animKeyPrefix
 
-class Troop extends Phaser.Physics.Arcade.Sprite {
+class TroopBase extends Phaser.Physics.Arcade.Sprite {
   constructor(config) {
     super(config.scene, config.x, config.y);
 
@@ -22,10 +22,11 @@ class Troop extends Phaser.Physics.Arcade.Sprite {
     // <attack stuff>
     this.enemyTroop = null;
     this.health = 100;
-    this.lastAttackTime = -1;
     this.attackRate = 1000;
     this.attackDamage = 20;
     this.attackDistance = 10;
+    this.cost = 3;
+    this.lastAttackTime = -1;
     this.isDestroyed = false;
     // </attack stuff>
 
@@ -129,3 +130,5 @@ class Troop extends Phaser.Physics.Arcade.Sprite {
     super.destroy();
   }
 }
+
+export default TroopBase;

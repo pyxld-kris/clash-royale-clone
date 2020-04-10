@@ -73,6 +73,8 @@ export default class PlayScene extends Scene {
       }
     );
 
+    // add these colliders here to the groups instead of 
+    // in each troop creation for code cleanup.
     this.physics.add.collider(this.player.troops, this.trees);
     this.physics.add.collider(this.enemy.troops, this.trees);
     this.physics.add.collider(this.player.troops, this.enemy.troops);
