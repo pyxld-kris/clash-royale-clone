@@ -1,9 +1,9 @@
 import Troop from "../TroopBase.js";
 
 class EvilTroop extends Troop {
-  constructor(scene, owner, x, y, velocityDirection) {
+  constructor(config) {
     super({
-      scene, owner, x, y, velocityDirection,
+      ...config,
       animKeyPrefix: "troop--evil"
     });
 

@@ -89,14 +89,12 @@ export default class LoadingScene extends Scene {
     this.load.on("progress", value => {
       console.log(value);
       progressBar.setScale(value, 1);
-      if (value == 1) {
-        // Loading is complete
-        setTimeout(() => {
-          this.nextScene();
-          this.loadingProgressComplete = true;
-        }, 2000);
-      }
     });
+
+    this.load.on("complete", () => {
+      this.nextScene();
+      this.loadingProgressComplete = true;
+    })
     ////////////////////////////////////////
   }
 }

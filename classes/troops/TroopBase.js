@@ -4,7 +4,7 @@ import Phaser from "phaser";
 
 class TroopBase extends Phaser.Physics.Arcade.Sprite {
   constructor(config) {
-    super(config.scene, config.x, config.y);
+    super(config.scene, config.x, config.y, 'character');
 
     // destructure things we'll use a lot (like the scene)
     const { scene } = config;
@@ -13,6 +13,18 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this).setOrigin(0.5, 1);
     // Add to physics engine
     scene.physics.add.existing(this);
+
+    // Fix the hitbox of this physics object
+    const width = this.width;
+    const height = this.height;
+    this
+      .setCircle(width / 2 - 4, 4, height / 2 + 1)
+      // Use function chaining to set other physical properties
+      .setCollideWorldBounds(true)
+      .setMaxVelocity(300, 300)
+      .setDrag(500)
+      .setBounce(1, 1)
+      .setFriction(0);
 
     this.owner = config.owner; // A Player object
     this.velocityDirection = config.velocityDirection;
@@ -32,7 +44,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
 
     // <Aggression zone stuff>
     this.aggroArea = scene.physics.add
-      .existing(scene.add.rectangle(x, y, 60, 60, 0xff0000, 0.1))
+      .existing(scene.add.rectangle(config.x, config.y, 60, 60, 0xff0000, 0.1))
       .setDepth(100);
     this.aggroArea.troop = this;
     // </Aggression zone stuff>
@@ -47,12 +59,12 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       .setMaxVelocity(30, 30)
       .setBounce(0.5);
 
-    this.setAcceleration(0, 50 * velocityDirection);
+    this.setAcceleration(0, 50 * config.velocityDirection);
 
     // default starting anim
     this.anims.play(`${this.animKeyPrefix}--front`, true);
 
-    scene.delayedCall(10000, this.destroy);
+    scene.time.delayedCall(10000, this.destroy);
   }
 
   doDamage(amount) {
@@ -96,14 +108,13 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       // Check if we're within range to do damage, otherwise approach
       const enemyTroop = this.enemyTroop;
 
-      if (
-        Phaser.Math.Distance.Between(
-          this.x,
-          this.y,
-          enemyTroop.x,
-          enemyTroop.y
-        ) > this.attackDistance
-      ) {
+      console.log('attacking')
+
+      let distance = Phaser.Math.Distance.Between(this.x, this.y, enemyTroop.x, enemyTroop.y);
+
+      console.log(distance)
+
+      if (distance > this.attackDistance) {
         // We need to move closer to our enemy troop
         this.scene.physics.accelerateTo(this, enemyTroop.x, enemyTroop.y, 100);
       } else {

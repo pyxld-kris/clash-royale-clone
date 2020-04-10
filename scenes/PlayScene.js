@@ -58,8 +58,8 @@ export default class PlayScene extends Scene {
       this.opponent.aggroAreas,
       this.player.troops,
       (aggroArea, enemyTroop) => {
-        let thisTroop = aggroArea.troop;
-        this.initiateTroopAttack(thisTroop, enemyTroop);
+        const thisTroop = aggroArea.troop;
+        thisTroop.initiateAttack(enemyTroop);
       }
     );
 
@@ -68,27 +68,27 @@ export default class PlayScene extends Scene {
       this.player.aggroAreas,
       this.opponent.troops,
       (aggroArea, enemyTroop) => {
-        let thisTroop = aggroArea.troop;
+        const thisTroop = aggroArea.troop;
         thisTroop.initiateAttack(enemyTroop);
       }
     );
 
+    genTerrain(this);
+
     // add these colliders here to the groups instead of 
     // in each troop creation for code cleanup.
     this.physics.add.collider(this.player.troops, this.trees);
-    this.physics.add.collider(this.enemy.troops, this.trees);
-    this.physics.add.collider(this.player.troops, this.enemy.troops);
+    this.physics.add.collider(this.opponent.troops, this.trees);
+    this.physics.add.collider(this.player.troops, this.opponent.troops);
     this.physics.add.collider(this.player.troops, this.player.troops);
-    this.physics.add.collider(this.enemy.troops, this.enemy.troops);
+    this.physics.add.collider(this.opponent.troops, this.opponent.troops);
 
-    this.generateTerrain();
     this.weather = new WeatherSystem(this);
   }
 
   update(time, delta) {}
 
   destroy() {
-    clearTimeout(this.backgroundAnimInterval);
     this.player.destroy();
     this.opponent.destroy();
     super.destroy();

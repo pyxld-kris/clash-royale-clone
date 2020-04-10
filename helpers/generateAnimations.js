@@ -1,12 +1,12 @@
 
-const anims = ['npc', 'troop--lil-demon', 'troop--evil'];
+const animNames = ['npc', 'troop--lil-demon', 'troop--evil'];
 
 function genAnims(scene) {
   // Create the animations we need from the player spritesheet
   const anims = scene.anims;
 
-  for (let i = 0; i < anims.length; i++) {
-    const anim = anims[i];
+  for (let i = 0; i < animNames.length; i++) {
+    const anim = animNames[i];
 
     anims.create({
       key: `${anim}--front`,

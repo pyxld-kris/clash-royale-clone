@@ -1,9 +1,9 @@
 import Phaser from "phaser";
-import LoadingScene from "/scenes/LoadingScene.js";
-import TitleScene from "/scenes/TitleScene.js";
-import PlayScene from "/scenes/PlayScene.js";
-import UIScene from "/scenes/UIScene.js";
-import CreditsScene from "/scenes/CreditsScene.js";
+import LoadingScene from "../scenes/LoadingScene.js";
+import TitleScene from "../scenes/TitleScene.js";
+import PlayScene from "../scenes/PlayScene.js";
+import UIScene from "../scenes/UIScene.js";
+import CreditsScene from "../scenes/CreditsScene.js";
 
 export var config = {
   type: Phaser.AUTO,
@@ -15,8 +15,11 @@ export var config = {
   physics: {
     default: "arcade",
     arcade: {
-      debug: false,
-      gravity: { x: 0, y: 0 }
+      debug: true,
+      gravity: {
+        x: 0,
+        y: 0
+      }
     }
   },
   scale: {

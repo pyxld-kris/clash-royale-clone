@@ -10,11 +10,8 @@ export default class ComputerPlayer extends Player {
     super(scene, 0, 0, halfGameWidth, 30);
 
     this.decisionInterval = scene.time.addEvent({
-      delay: 1000, // ms
-      callback: () => {
-        this.makeDecision();
-      },
-      //args: [],
+      delay: 1000,
+      callback: this.makeDecision,
       callbackScope: this,
       loop: true
     });

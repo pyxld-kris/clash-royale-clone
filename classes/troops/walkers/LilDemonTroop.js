@@ -1,10 +1,10 @@
 import Troop from "../TroopBase.js";
 
 class LilDemonTroop extends Troop {
-  constructor(scene, owner, x, y, velocityDirection) {
+  constructor(config) {
     super({
-      scene, owner, x, y, velocityDirection,
-      animKeyPrefix: "troop--lil--demon"
+      ...config,
+      animKeyPrefix: "troop--lil-demon"
     });
 
     this.setTint(0xffffff);

@@ -1,14 +1,9 @@
 import Phaser from "phaser";
 
 import ManaBank from "./ManaBank.js";
-import Tower from "../classes/environment/Tower.js";
+import Tower from "./environment/Tower.js";
 
 import { Walkers } from './troops';
-
-import {
-  gameWidth, gameHeight,
-  halfGameWidth, halfGameHeight
-} from '../constants';
 
 const cardTypes = [
   {
@@ -20,8 +15,8 @@ const cardTypes = [
   {
     name: 'LilDemonTroop',
     spawn: (config) => {
-      Walkers.LilDemonTroop(config);
-      Walkers.LilDemonTroop({
+      new Walkers.LilDemonTroop(config);
+      new Walkers.LilDemonTroop({
         ...config,
         x: config.x + 10
       });
@@ -34,6 +29,10 @@ const cardTypes = [
 class Player {
   constructor(scene, spawnZoneX, spawnZoneY, towerX, towerY, opponent) {
     this.scene = scene;
+
+    const gameWidth = scene.game.config.width;
+    const gameHeight = scene.game.config.height;
+    const halfGameHeight = gameHeight / 2;
 
     this.opponent = opponent;
     this.troops = scene.physics.add.group();
@@ -62,7 +61,7 @@ class Player {
     if (this.manaBank.getManaAmount() < cost) return;
 
     // get a random card type, in the future this will be dicided by the player.
-    const CardType = spawnTypes[parseInt(Math.random() * spawnTypes.length, 0)];
+    const CardType = cardTypes[parseInt(Math.random() * cardTypes.length, 0)];
 
     // then spawn the troop
     CardType.spawn({ scene: this.scene, owner: this, x, y, velocityDirection });
