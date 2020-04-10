@@ -1,16 +1,14 @@
-import Phaser from "phaser";
+import { Scene } from "phaser";
 
 import ControlledPlayer from "../classes/ControlledPlayer.js";
 import ComputerPlayer from "../classes/ComputerPlayer.js";
 
-import Tree from "../classes/environment/Tree.js";
-import TreeTrunk from "../classes/environment/TreeTrunk.js";
-import Rock from "../classes/environment/Rock.js";
-import Grass from "../classes/environment/Grass.js";
-
 import WeatherSystem from "../weather";
 
-export default class PlayScene extends Phaser.Scene {
+import genAnims from '../helpers/generateAnimations';
+import genTerrain from '../helpers/generateTerrain';
+
+export default class PlayScene extends Scene {
   constructor() {
     super("PlayScene");
   }
@@ -18,6 +16,9 @@ export default class PlayScene extends Phaser.Scene {
   create() {
     // Start UIScene, which will layer on top of PlayScene
     this.scene.run("UIScene");
+
+    // helper function to generate our sprite anims
+    genAnims(this);
 
     const gameWidth = this.game.config.width;
     const gameHeight = this.game.config.height;
@@ -57,8 +58,8 @@ export default class PlayScene extends Phaser.Scene {
       this.opponent.aggroAreas,
       this.player.troops,
       (aggroArea, enemyTroop) => {
-        let thisTroop = aggroArea.troop;
-        this.initiateTroopAttack(thisTroop, enemyTroop);
+        const thisTroop = aggroArea.troop;
+        thisTroop.initiateAttack(enemyTroop);
       }
     );
 
@@ -67,65 +68,27 @@ export default class PlayScene extends Phaser.Scene {
       this.player.aggroAreas,
       this.opponent.troops,
       (aggroArea, enemyTroop) => {
-        let thisTroop = aggroArea.troop;
-        this.initiateTroopAttack(thisTroop, enemyTroop);
+        const thisTroop = aggroArea.troop;
+        thisTroop.initiateAttack(enemyTroop);
       }
     );
 
-    this.generateTerrain();
+    genTerrain(this);
+
+    // add these colliders here to the groups instead of 
+    // in each troop creation for code cleanup.
+    this.physics.add.collider(this.player.troops, this.trees);
+    this.physics.add.collider(this.opponent.troops, this.trees);
+    this.physics.add.collider(this.player.troops, this.opponent.troops);
+    this.physics.add.collider(this.player.troops, this.player.troops);
+    this.physics.add.collider(this.opponent.troops, this.opponent.troops);
+
     this.weather = new WeatherSystem(this);
   }
 
-  initiateTroopAttack(attacker, target) {
-    if (attacker.canAttack()) {
-      attacker.startAttacking(target);
-    }
-  }
-
-  generateTerrain() {
-    // Create environment objects
-    const worldWidth = this.physics.world.bounds.width;
-    const worldHeight = this.physics.world.bounds.height;
-
-    // Create 10 randomly positioned trees
-    this.trees = [];
-    for (let i = 0; i < 3; i++) {
-      let treeX = parseInt(Math.random() * worldWidth, 0);
-      let treeY = parseInt(Math.random() * worldHeight, 0);
-      this.trees.push(new Tree(this, treeX, treeY));
-    }
-
-    // Create 10 randomly positionedtree trunks
-    this.treeTrunks = [];
-    for (let i = 0; i < 2; i++) {
-      let treeTrunkX = parseInt(Math.random() * worldWidth, 0);
-      let treeTrunkY = parseInt(Math.random() * worldHeight, 0);
-      this.treeTrunks.push(new TreeTrunk(this, treeTrunkX, treeTrunkY));
-    }
-
-    // Create 20 randomly positioned rocks
-    this.rocks = [];
-    for (let i = 0; i < 7; i++) {
-      let rockX = parseInt(Math.random() * worldWidth, 0);
-      let rockY = parseInt(Math.random() * worldHeight, 0);
-      this.rocks.push(new Rock(this, rockX, rockY));
-    }
-
-    // Create 20 randomly positioned grass
-    this.grass = [];
-    for (let i = 0; i < 8; i++) {
-      let grassX = parseInt(Math.random() * worldWidth, 0);
-      let grassY = parseInt(Math.random() * worldHeight, 0);
-      this.grass.push(new Grass(this, grassX, grassY));
-    }
-  }
-
-  update(time, delta) {
-    //console.log("playscene update");
-  }
+  update(time, delta) {}
 
   destroy() {
-    clearTimeout(this.backgroundAnimInterval);
     this.player.destroy();
     this.opponent.destroy();
     super.destroy();

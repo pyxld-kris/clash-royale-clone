@@ -8,7 +8,7 @@ const fontStyle = {
   strokeThickness: 3
 };
 
-export default class UIScene extends Scene {
+class UIScene extends Scene {
   constructor() {
     super("UIScene");
   }
@@ -73,3 +73,5 @@ export default class UIScene extends Scene {
     }
   }
 }
+
+export default UIScene;

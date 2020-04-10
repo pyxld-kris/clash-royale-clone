@@ -10,18 +10,13 @@ export default class EnvironmentObject extends Phaser.Physics.Arcade.Sprite {
 
     if (isPhysical) {
       // Add to physics engine
-      scene.physics.add.existing(this, false); // second parameter is isStatic
+      scene.physics.add.existing(this);
       this.body.setImmovable(true);
 
       // Fix the hitbox of this physics object
       const width = this.width;
       const height = this.height;
       this.setSize(width, parseInt(height / 2, 0)).setOffset(0, height / 2);
-      //.setFriction(0);
-      //.setCircle(width / 2 - 4, 4, height / 2 + 1);
-
-      //this.body.friction.x = 0;
-      //this.body.friction.y = 0;
 
       try {
         scene.physics.add.collider(this, scene.player);
