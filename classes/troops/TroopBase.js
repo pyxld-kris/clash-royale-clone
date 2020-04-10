@@ -4,7 +4,7 @@ import Phaser from "phaser";
 
 class TroopBase extends Phaser.Physics.Arcade.Sprite {
   constructor(config) {
-    super(config.scene, config.x, config.y, 'character');
+    super(config.scene, config.x, config.y, "character");
 
     // destructure things we'll use a lot (like the scene)
     const { scene } = config;
@@ -17,8 +17,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
     // Fix the hitbox of this physics object
     const width = this.width;
     const height = this.height;
-    this
-      .setCircle(width / 2 - 4, 4, height / 2 + 1)
+    this.setCircle(width / 2 - 4, 4, height / 2 + 1)
       // Use function chaining to set other physical properties
       .setCollideWorldBounds(true)
       .setMaxVelocity(300, 300)
@@ -64,7 +63,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
     // default starting anim
     this.anims.play(`${this.animKeyPrefix}--front`, true);
 
-    scene.time.delayedCall(10000, this.destroy);
+    scene.time.delayedCall(10000, this.destroy, null, this);
   }
 
   doDamage(amount) {
@@ -108,11 +107,16 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       // Check if we're within range to do damage, otherwise approach
       const enemyTroop = this.enemyTroop;
 
-      console.log('attacking')
+      console.log("attacking");
 
-      let distance = Phaser.Math.Distance.Between(this.x, this.y, enemyTroop.x, enemyTroop.y);
+      let distance = Phaser.Math.Distance.Between(
+        this.x,
+        this.y,
+        enemyTroop.x,
+        enemyTroop.y
+      );
 
-      console.log(distance)
+      console.log(distance);
 
       if (distance > this.attackDistance) {
         // We need to move closer to our enemy troop
@@ -130,9 +134,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  spawn() {
-    
-  }
+  spawn() {}
 
   destroy() {
     this.isDestroyed = true;
