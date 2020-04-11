@@ -107,16 +107,12 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       // Check if we're within range to do damage, otherwise approach
       const enemyTroop = this.enemyTroop;
 
-      console.log("attacking");
-
       let distance = Phaser.Math.Distance.Between(
         this.x,
         this.y,
         enemyTroop.x,
         enemyTroop.y
       );
-
-      console.log(distance);
 
       if (distance > this.attackDistance) {
         // We need to move closer to our enemy troop

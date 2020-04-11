@@ -1,12 +1,12 @@
-import { Scene } from "phaser";
+import { Phaser, Scene } from "phaser";
 
 import ControlledPlayer from "../classes/ControlledPlayer.js";
 import ComputerPlayer from "../classes/ComputerPlayer.js";
 
 import WeatherSystem from "../weather";
 
-import genAnims from '../helpers/generateAnimations';
-import genTerrain from '../helpers/generateTerrain';
+import genAnims from "../helpers/generateAnimations";
+import genTerrain from "../helpers/generateTerrain";
 
 export default class PlayScene extends Scene {
   constructor() {
@@ -75,7 +75,7 @@ export default class PlayScene extends Scene {
 
     genTerrain(this);
 
-    // add these colliders here to the groups instead of 
+    // add these colliders here to the groups instead of
     // in each troop creation for code cleanup.
     this.physics.add.collider(this.player.troops, this.trees);
     this.physics.add.collider(this.opponent.troops, this.trees);

@@ -3,8 +3,14 @@
 
 import EvilTroop from "./EvilTroop";
 import LilDemonTroop from "./LilDemonTroop";
+import BattleOtterTroop from "./BattleOtterTroop";
+import AlienTroop from "./AlienTroop";
+import BabyCowTroop from "./BabyCowTroop";
 
 export default {
   EvilTroop,
-  LilDemonTroop
+  LilDemonTroop,
+  BattleOtterTroop,
+  AlienTroop,
+  BabyCowTroop
 };

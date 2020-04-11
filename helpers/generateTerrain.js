@@ -1,8 +1,10 @@
+import Phaser from "phaser";
 
 import Tree from "../classes/environment/Tree.js";
 import TreeTrunk from "../classes/environment/TreeTrunk.js";
 import Rock from "../classes/environment/Rock.js";
 import Grass from "../classes/environment/Grass.js";
+import Waypoint from "../classes/Waypoint.js";
 
 function genTerrain(scene) {
   // Create environment objects
@@ -39,6 +41,20 @@ function genTerrain(scene) {
     let grassX = parseInt(Math.random() * worldWidth, 0);
     let grassY = parseInt(Math.random() * worldHeight, 0);
     scene.grass.push(new Grass(scene, grassX, grassY));
+  }
+
+  // TODO: Move to genTerrain
+  // TODO: finish waypoints!
+  // Populate some random Waypoints
+  try {
+    scene.waypoints = [];
+    for (let i = 0; i < 6; i++) {
+      let randX = Phaser.Math.Between(0, scene.game.config.width);
+      let randY = Phaser.Math.Between(0, scene.game.config.height);
+      scene.waypoints.push(new Waypoint(scene, randX, randY));
+    }
+  } catch (e) {
+    console.error(e);
   }
 }
 

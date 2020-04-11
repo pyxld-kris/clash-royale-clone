@@ -44,6 +44,22 @@ export default class LoadingScene extends Scene {
         frameHeight: 19
       }
     );
+    this.load.spritesheet(
+      "troop--battle-otter",
+      "../assets/troop--battle-otter.png",
+      {
+        frameWidth: 16,
+        frameHeight: 19
+      }
+    );
+    this.load.spritesheet("troop--baby-cow", "../assets/troop--baby-cow.png", {
+      frameWidth: 16,
+      frameHeight: 19
+    });
+    this.load.spritesheet("troop--alien", "../assets/troop--alien.png", {
+      frameWidth: 16,
+      frameHeight: 19
+    });
     this.load.spritesheet("rainSplash", "../assets/rainSplash.png", {
       frameWidth: 16,
       frameHeight: 16
@@ -94,7 +110,7 @@ export default class LoadingScene extends Scene {
     this.load.on("complete", () => {
       this.nextScene();
       this.loadingProgressComplete = true;
-    })
+    });
     ////////////////////////////////////////
   }
 }

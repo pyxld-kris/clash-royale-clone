@@ -3,23 +3,56 @@ import Phaser from "phaser";
 import ManaBank from "./ManaBank.js";
 import Tower from "./environment/Tower.js";
 
-import { Walkers } from './troops';
+import { Walkers } from "./troops";
 
 const cardTypes = [
   {
-    name: 'EvilTroop',
-    spawn: (config) => {
+    name: "EvilTroop",
+    spawn: config => {
       new Walkers.EvilTroop(config);
     }
   },
   {
-    name: 'LilDemonTroop',
-    spawn: (config) => {
+    name: "LilDemonTroop",
+    spawn: config => {
       new Walkers.LilDemonTroop(config);
       new Walkers.LilDemonTroop({
         ...config,
         x: config.x + 10
       });
+    }
+  },
+  {
+    name: "BattleOtterTroop",
+    spawn: config => {
+      new Walkers.BattleOtterTroop(config);
+    }
+  },
+  {
+    name: "AlienTroop",
+    spawn: config => {
+      new Walkers.AlienTroop({
+        ...config,
+        x: config.x + 10
+      });
+      new Walkers.AlienTroop({
+        ...config,
+        x: config.x - 10
+      });
+      new Walkers.AlienTroop({
+        ...config,
+        y: config.y - 10
+      });
+      new Walkers.AlienTroop({
+        ...config,
+        y: config.y + 10
+      });
+    }
+  },
+  {
+    name: "BabyCowTroop",
+    spawn: config => {
+      new Walkers.BabyCowTroop(config);
     }
   }
 ];
@@ -53,7 +86,6 @@ class Player {
   }
 
   spawnTroop(x, y, cost, velocityDirection) {
-
     // First, let's check if this click falls within our boundaries.
     if (!Phaser.Geom.Rectangle.Contains(this.spawnZone, x, y)) return;
 

@@ -1,5 +1,11 @@
-
-const animNames = ['npc', 'troop--lil-demon', 'troop--evil'];
+const animNames = [
+  "npc",
+  "troop--lil-demon",
+  "troop--evil",
+  "troop--battle-otter",
+  "troop--alien",
+  "troop--baby-cow"
+];
 
 function genAnims(scene) {
   // Create the animations we need from the player spritesheet
