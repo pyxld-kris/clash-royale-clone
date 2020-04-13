@@ -12,7 +12,7 @@ class Waypoint extends Phaser.GameObjects.Rectangle {
       .setOrigin(0.5, 0.5)
       .setDepth(10000);
 
-    Waypoint.pointers.push(this);
+    STATIC.pointers.push(this);
   }
 
   destroy() {
@@ -23,22 +23,35 @@ class Waypoint extends Phaser.GameObjects.Rectangle {
   }
 }
 
-Waypoint.getNearest = function(x, y) {
+const STATIC = Waypoint;
+
+STATIC.getNext = function(x, y) {
+  // Returns nearest waypoint, excluding waypoints within
+  // a certain threshold distance (prevents returning waypoints
+  // characters are on top of)
+  const DISTANCE_THRESHOLD = 5;
+
   const waypoints = Waypoint.pointers;
   let nearestDistance = 999999999;
   let nearestWaypoint = null;
   for (let i = 0; i < waypoints.length; i++) {
     let thisWaypoint = waypoints[i];
-    if (
-      Phaser.Math.Distance.Between(x, y, thisWaypoint.x, thisWaypoint.y) <
-      nearestDistance
-    ) {
+    let distance = Phaser.Math.Distance.Between(
+      x,
+      y,
+      thisWaypoint.x,
+      thisWaypoint.y
+    );
+
+    if (distance < DISTANCE_THRESHOLD) continue; // Waypoint is too close
+
+    if (distance < nearestDistance) {
       nearestWaypoint = thisWaypoint;
     }
   }
 
   return nearestWaypoint;
 };
-Waypoint.pointers = [];
+STATIC.pointers = [];
 
 export default Waypoint;

@@ -4,7 +4,7 @@ class EvilTroop extends Troop {
   constructor(config) {
     super({
       ...config,
-      animKeyPrefix: "troop--evil"
+      animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
 
     this.setTint(0xffffff);
@@ -14,5 +14,12 @@ class EvilTroop extends Troop {
     super.destroy();
   }
 }
+
+const STATIC = EvilTroop;
+STATIC.ANIM_KEY_PREFIX = "troop--evil";
+STATIC.NAME = "EvilTroop";
+STATIC.doSpawn = function(config) {
+  new EvilTroop(config);
+};
 
 export default EvilTroop;

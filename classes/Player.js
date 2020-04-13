@@ -5,57 +5,11 @@ import Tower from "./environment/Tower.js";
 
 import { Walkers } from "./troops";
 
-const cardTypes = [
-  {
-    name: "EvilTroop",
-    spawn: config => {
-      new Walkers.EvilTroop(config);
-    }
-  },
-  {
-    name: "LilDemonTroop",
-    spawn: config => {
-      new Walkers.LilDemonTroop(config);
-      new Walkers.LilDemonTroop({
-        ...config,
-        x: config.x + 10
-      });
-    }
-  },
-  {
-    name: "BattleOtterTroop",
-    spawn: config => {
-      new Walkers.BattleOtterTroop(config);
-    }
-  },
-  {
-    name: "AlienTroop",
-    spawn: config => {
-      new Walkers.AlienTroop({
-        ...config,
-        x: config.x + 10
-      });
-      new Walkers.AlienTroop({
-        ...config,
-        x: config.x - 10
-      });
-      new Walkers.AlienTroop({
-        ...config,
-        y: config.y - 10
-      });
-      new Walkers.AlienTroop({
-        ...config,
-        y: config.y + 10
-      });
-    }
-  },
-  {
-    name: "BabyCowTroop",
-    spawn: config => {
-      new Walkers.BabyCowTroop(config);
-    }
-  }
-];
+// Dynamically populate the card types from our Troop classes
+const cardTypes = [];
+for (const troopClass of Object.values(Walkers)) {
+  cardTypes.push({ name: troopClass.name, doSpawn: troopClass.doSpawn });
+}
 
 // scene, spawnZoneX, spawnZoneY, towerX, towerY, opponent
 
@@ -96,7 +50,13 @@ class Player {
     const CardType = cardTypes[parseInt(Math.random() * cardTypes.length, 0)];
 
     // then spawn the troop
-    CardType.spawn({ scene: this.scene, owner: this, x, y, velocityDirection });
+    CardType.doSpawn({
+      scene: this.scene,
+      owner: this,
+      x,
+      y,
+      velocityDirection
+    });
 
     // and remove mana equal to it's cost.
     this.manaBank.deductMana(cost);
