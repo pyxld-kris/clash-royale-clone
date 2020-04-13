@@ -59,15 +59,14 @@ function genTerrain(scene) {
     // Waypoint lanes
     const gameWidth = scene.game.config.width;
     const gameHeight = scene.game.config.height;
-    const oneHalfWidth = gameWidth / 2;
-    const oneFourthWidth = oneHalfWidth / 2;
+    const oneTenthWidth = gameWidth / 10;
     const oneFifthHeight = gameHeight / 5;
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 5; j++) {
         scene.waypoints.push(
           new Waypoint(
             scene,
-            oneFourthWidth + i * oneFourthWidth * 2,
+            oneTenthWidth * 2 + i * oneTenthWidth * 6,
             oneFifthHeight / 2 + oneFifthHeight * j
           )
         );

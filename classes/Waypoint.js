@@ -8,7 +8,9 @@ class Waypoint extends Phaser.Physics.Arcade.Sprite {
     scene.add
       .existing(this)
       .setOrigin(0.5, 0.5)
-      .setDepth(10000);
+      .setDepth(10000)
+      .setScale(2)
+      .setAlpha(0);
 
     // Add to physics engine
     scene.physics.add.existing(this);

@@ -43,7 +43,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       this.health = 100;
       this.attackRate = 1000;
       this.attackDamage = 20;
-      this.attackDistance = 10;
+      this.attackDistance = 30;
       this.cost = 3;
       this.lastAttackTime = -1;
       this.isDestroyed = false;
@@ -142,6 +142,16 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
   }
 
   damageEnemy(amount) {
+    this.scene.tweens.add({
+      targets: [this],
+      scaleX: 2,
+      scaleY: 2,
+      ease: "Linear",
+      duration: 200,
+      yoyo: true,
+      repeat: 0,
+      callbackScope: this
+    });
     this.enemyTroop.doDamage(this.attackDamage);
   }
 
@@ -170,21 +180,25 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       } else {
         // we're ready to attack
         this.setAcceleration(0, 0);
+        this.setVelocity(0, 0);
         if (time - this.attackRate > this.lastAttackTime) {
+          this.lastAttackTime = time;
           this.damageEnemy();
         }
       }
-    } else if (!this.currentWaypoint) {
+    } else {
       this.enemyTroop = null;
-      //this.setAcceleration(0, 50 * this.velocityDirection);
-      this.getNextWaypoint();
-    } else if (this.currentWaypoint) {
-      this.scene.physics.accelerateTo(
-        this,
-        this.currentWaypoint.x,
-        this.currentWaypoint.y,
-        this.movementSpeed
-      );
+      if (!this.currentWaypoint) {
+        //this.setAcceleration(0, 50 * this.velocityDirection);
+        this.getNextWaypoint();
+      } else if (this.currentWaypoint) {
+        this.scene.physics.accelerateTo(
+          this,
+          this.currentWaypoint.x,
+          this.currentWaypoint.y,
+          this.movementSpeed
+        );
+      }
     }
   }
 
