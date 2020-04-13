@@ -1,69 +1,119 @@
 import Phaser from "phaser";
 
+import Waypoint from "../Waypoint.js";
+
 // scene, owner, x, y, velocityDirection, animKeyPrefix
 
 class TroopBase extends Phaser.Physics.Arcade.Sprite {
   constructor(config) {
-    super(config.scene, config.x, config.y, "character");
+    try {
+      super(config.scene, config.x, config.y, "character");
 
-    // destructure things we'll use a lot (like the scene)
-    const { scene } = config;
+      // destructure things we'll use a lot (like the scene)
+      const { scene } = config;
 
-    // Add to rendering engine
-    scene.add.existing(this).setOrigin(0.5, 1);
-    // Add to physics engine
-    scene.physics.add.existing(this);
+      // Add to rendering engine
+      scene.add.existing(this).setOrigin(0.5, 1);
+      // Add to physics engine
+      scene.physics.add.existing(this);
 
-    // Fix the hitbox of this physics object
-    const width = this.width;
-    const height = this.height;
-    this.setCircle(width / 2 - 4, 4, height / 2 + 1)
-      // Use function chaining to set other physical properties
-      .setCollideWorldBounds(true)
-      .setMaxVelocity(300, 300)
-      .setDrag(500)
-      .setBounce(1, 1)
-      .setFriction(0);
+      // Fix the hitbox of this physics object
+      const width = this.width;
+      const height = this.height;
+      this.setCircle(width / 2 - 4, 4, height / 2 + 1)
+        // Use function chaining to set other physical properties
+        .setCollideWorldBounds(true)
+        .setMaxVelocity(300, 300)
+        .setDrag(500)
+        .setBounce(1, 1)
+        .setFriction(0);
 
-    this.owner = config.owner; // A Player object
-    this.velocityDirection = config.velocityDirection;
+      this.owner = config.owner; // A Player object
+      this.velocityDirection = config.velocityDirection;
 
-    this.animKeyPrefix = config.animKeyPrefix;
+      this.animKeyPrefix = config.animKeyPrefix;
 
-    // <attack stuff>
-    this.enemyTroop = null;
-    this.health = 100;
-    this.attackRate = 1000;
-    this.attackDamage = 20;
-    this.attackDistance = 10;
-    this.cost = 3;
-    this.lastAttackTime = -1;
-    this.isDestroyed = false;
-    // </attack stuff>
+      // <movement stuff>
+      this.currentWaypoint = null;
+      this.movementSpeed = 100;
+      // </movement stuff>
 
-    // <Aggression zone stuff>
-    this.aggroArea = scene.physics.add
-      .existing(scene.add.rectangle(config.x, config.y, 60, 60, 0xff0000, 0.1))
-      .setDepth(100);
-    this.aggroArea.troop = this;
-    // </Aggression zone stuff>
+      // <attack stuff>
+      this.enemyTroop = null;
+      this.health = 100;
+      this.attackRate = 1000;
+      this.attackDamage = 20;
+      this.attackDistance = 10;
+      this.cost = 3;
+      this.lastAttackTime = -1;
+      this.isDestroyed = false;
+      // </attack stuff>
 
-    this.owner.troops.add(this);
-    this.owner.aggroAreas.add(this.aggroArea);
+      // <Aggression zone stuff>
+      this.aggroArea = scene.physics.add
+        .existing(
+          scene.add.rectangle(config.x, config.y, 60, 60, 0xff0000, 0.1)
+        )
+        .setDepth(100);
+      this.aggroArea.troop = this;
+      // </Aggression zone stuff>
 
-    this.setTint(0x555599);
+      this.owner.troops.add(this);
+      this.owner.aggroAreas.add(this.aggroArea);
 
-    this.setFriction(10)
-      .setDrag(10)
-      .setMaxVelocity(30, 30)
-      .setBounce(0.5);
+      this.setTint(0x555599);
 
-    this.setAcceleration(0, 50 * config.velocityDirection);
+      this.setFriction(10)
+        .setDrag(10)
+        .setMaxVelocity(30, 30)
+        .setBounce(0.5);
 
-    // default starting anim
-    this.anims.play(`${this.animKeyPrefix}--front`, true);
+      //this.setAcceleration(0, 50 * config.velocityDirection);
+      this.getNextWaypoint();
 
-    scene.time.delayedCall(10000, this.destroy, null, this);
+      // default starting anim
+      this.anims.play(`${this.animKeyPrefix}--front`, true);
+
+      scene.time.delayedCall(10000, this.destroy, null, this);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  getNextWaypoint() {
+    try {
+      let nextWaypoint = Waypoint.getNext(
+        this.x,
+        this.y,
+        this.velocityDirection
+      );
+
+      if (nextWaypoint) {
+        this.scene.physics.accelerateTo(
+          this,
+          nextWaypoint.x,
+          nextWaypoint.y,
+          this.movementSpeed
+        );
+
+        // Detect when we reach this waypoint, and move to the next
+        if (this.waypointOverlap)
+          this.scene.physics.world.removeCollider(this.waypointOverlap);
+        this.waypointOverlap = this.scene.physics.add.overlap(
+          this,
+          nextWaypoint,
+          () => {
+            this.getNextWaypoint();
+          }
+        );
+      } else {
+        // No more waypoints
+        this.setAcceleration(0, this.movementSpeed * this.velocityDirection);
+      }
+      this.currentWaypoint = nextWaypoint;
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   doDamage(amount) {
@@ -124,17 +174,27 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
           this.damageEnemy();
         }
       }
-    } else {
+    } else if (!this.currentWaypoint) {
       this.enemyTroop = null;
-      this.setAcceleration(0, 50 * this.velocityDirection);
+      //this.setAcceleration(0, 50 * this.velocityDirection);
+      this.getNextWaypoint();
+    } else if (this.currentWaypoint) {
+      this.scene.physics.accelerateTo(
+        this,
+        this.currentWaypoint.x,
+        this.currentWaypoint.y,
+        this.movementSpeed
+      );
     }
   }
 
-  spawn() {}
-
   destroy() {
+    console.log("destroy");
     this.isDestroyed = true;
     this.aggroArea.destroy();
+
+    //if (this.waypointOverlap)
+    //  this.scene.physics.world.removeCollider(this.waypointOverlap);
 
     super.destroy();
   }

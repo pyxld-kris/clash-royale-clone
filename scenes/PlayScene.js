@@ -2,6 +2,7 @@ import { Phaser, Scene } from "phaser";
 
 import ControlledPlayer from "../classes/ControlledPlayer.js";
 import ComputerPlayer from "../classes/ComputerPlayer.js";
+import Waypoint from "../classes/Waypoint.js";
 
 import WeatherSystem from "../weather";
 
@@ -82,6 +83,26 @@ export default class PlayScene extends Scene {
     this.physics.add.collider(this.player.troops, this.opponent.troops);
     this.physics.add.collider(this.player.troops, this.player.troops);
     this.physics.add.collider(this.opponent.troops, this.opponent.troops);
+
+    // Set up Waypoint and Troop interactions
+    /*
+    this.waypointGroup = this.add.group();
+    this.waypointGroup.addMultiple(Waypoint.pointers);
+    this.physics.add.collider(
+      this.player.troops,
+      this.waypointGroup,
+      (waypoint, troop) => {
+        troop.nextWaypoint();
+      }
+    );
+    this.physics.add.collider(
+      this.opponent.troops,
+      this.waypointGroup,
+      (waypoint, troop) => {
+        troop.nextWaypoint();
+      }
+    );
+    */
 
     this.weather = new WeatherSystem(this);
   }

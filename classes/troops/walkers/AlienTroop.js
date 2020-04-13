@@ -21,19 +21,28 @@ STATIC.NAME = "AlienTroop";
 STATIC.doSpawn = function(config) {
   new AlienTroop({
     ...config,
-    x: config.x + 10
+    x: config.x,
+    y: config.y
   });
   new AlienTroop({
     ...config,
-    x: config.x - 10
+    x: config.x + 10,
+    y: config.y + 10
   });
   new AlienTroop({
     ...config,
+    x: config.x - 10,
     y: config.y - 10
   });
   new AlienTroop({
     ...config,
+    x: config.x - 10,
     y: config.y + 10
+  });
+  new AlienTroop({
+    ...config,
+    x: config.x + 10,
+    y: config.y - 10
   });
 };
 

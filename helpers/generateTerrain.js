@@ -48,10 +48,30 @@ function genTerrain(scene) {
   // Populate some random Waypoints
   try {
     scene.waypoints = [];
+    // Random waypoints
+    /*
     for (let i = 0; i < 6; i++) {
       let randX = Phaser.Math.Between(0, scene.game.config.width);
       let randY = Phaser.Math.Between(0, scene.game.config.height);
       scene.waypoints.push(new Waypoint(scene, randX, randY));
+    }
+    */
+    // Waypoint lanes
+    const gameWidth = scene.game.config.width;
+    const gameHeight = scene.game.config.height;
+    const oneHalfWidth = gameWidth / 2;
+    const oneFourthWidth = oneHalfWidth / 2;
+    const oneFifthHeight = gameHeight / 5;
+    for (let i = 0; i < 2; i++) {
+      for (let j = 0; j < 5; j++) {
+        scene.waypoints.push(
+          new Waypoint(
+            scene,
+            oneFourthWidth + i * oneFourthWidth * 2,
+            oneFifthHeight / 2 + oneFifthHeight * j
+          )
+        );
+      }
     }
   } catch (e) {
     console.error(e);

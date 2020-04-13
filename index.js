@@ -1,4 +1,8 @@
 import Phaser from "phaser";
 import { config } from "./settings/config.js";
 
-new Phaser.Game(config);
+try {
+  new Phaser.Game(config);
+} catch (e) {
+  console.error(e);
+}

@@ -1,16 +1,18 @@
 import Phaser from "phaser";
 
-// TODO: make troops/entities reference waypoints when moving
-
-class Waypoint extends Phaser.GameObjects.Rectangle {
+class Waypoint extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, 10, 10, 0xff9900);
+    super(scene, x, y, "sapling");
 
     // Add to rendering engine
     scene.add
       .existing(this)
       .setOrigin(0.5, 0.5)
       .setDepth(10000);
+
+    // Add to physics engine
+    scene.physics.add.existing(this);
+    this.setImmovable(true);
 
     STATIC.pointers.push(this);
   }
@@ -25,12 +27,11 @@ class Waypoint extends Phaser.GameObjects.Rectangle {
 
 const STATIC = Waypoint;
 
-STATIC.getNext = function(x, y) {
+const DISTANCE_THRESHOLD = 10;
+STATIC.getNext = function(x, y, velocityDirection) {
   // Returns nearest waypoint, excluding waypoints within
   // a certain threshold distance (prevents returning waypoints
   // characters are on top of)
-  const DISTANCE_THRESHOLD = 5;
-
   const waypoints = Waypoint.pointers;
   let nearestDistance = 999999999;
   let nearestWaypoint = null;
@@ -45,7 +46,15 @@ STATIC.getNext = function(x, y) {
 
     if (distance < DISTANCE_THRESHOLD) continue; // Waypoint is too close
 
+    // Check if this waypoint is in the correct direction for this troop (based on player)
+    if (
+      (y - thisWaypoint.y > 0 && velocityDirection > 0) ||
+      (y - thisWaypoint.y < 0 && velocityDirection < 0)
+    )
+      continue;
+
     if (distance < nearestDistance) {
+      nearestDistance = distance;
       nearestWaypoint = thisWaypoint;
     }
   }

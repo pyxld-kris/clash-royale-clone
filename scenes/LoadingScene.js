@@ -22,6 +22,7 @@ export default class LoadingScene extends Scene {
     this.load.image("building-outer", "../assets/building-outer.png");
     this.load.image("rock", "../assets/rock.png");
     this.load.image("grass", "../assets/grass.png");
+    this.load.image("sapling", "../assets/sapling.png");
     this.load.image("tree", "../assets/tree.png");
     this.load.image("tree-trunk", "../assets/tree-trunk.png");
     this.load.spritesheet("character", "../assets/character.png", {
@@ -64,6 +65,13 @@ export default class LoadingScene extends Scene {
       frameWidth: 16,
       frameHeight: 16
     });
+
+    // Create waypoint image with texture generation
+    let circle = this.add.graphics();
+    circle.fillStyle(0xffffff, 1);
+    circle.fillCircle(10, 10, 10);
+    circle.generateTexture("waypoint");
+    circle.destroy();
   }
 
   // The rest of this file makes the visual loading bar work!
