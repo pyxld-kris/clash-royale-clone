@@ -6,8 +6,21 @@ class AlienTroop extends Troop {
       ...config,
       animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
-
     this.setTint(0xffffff);
+
+    // <movement stuff>
+    this.movementSpeed = 40;
+    // </movement stuff>
+
+    // <attack stuff>
+    this.health = 10;
+    this.attackRate = 1000;
+    this.attackDamage = 10;
+    this.attackDistance = 10;
+    this.cost = 4;
+    // </attack stuff>
+
+    this.setMaxVelocity(this.movementSpeed);
   }
 
   destroy() {
@@ -18,6 +31,7 @@ class AlienTroop extends Troop {
 const STATIC = AlienTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--alien";
 STATIC.NAME = "AlienTroop";
+STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
   new AlienTroop({
     ...config,

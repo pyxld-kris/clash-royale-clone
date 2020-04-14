@@ -6,8 +6,21 @@ class EvilTroop extends Troop {
       ...config,
       animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
-
     this.setTint(0xffffff);
+
+    // <movement stuff>
+    this.movementSpeed = 20;
+    // </movement stuff>
+
+    // <attack stuff>
+    this.health = 200;
+    this.attackRate = 1500;
+    this.attackDamage = 50;
+    this.attackDistance = 20;
+    this.cost = 3;
+    // </attack stuff>
+
+    this.setMaxVelocity(this.movementSpeed);
   }
 
   destroy() {
@@ -18,6 +31,7 @@ class EvilTroop extends Troop {
 const STATIC = EvilTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--evil";
 STATIC.NAME = "EvilTroop";
+STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
   new EvilTroop(config);
 };

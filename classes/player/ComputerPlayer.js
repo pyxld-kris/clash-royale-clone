@@ -2,12 +2,12 @@ import Player from "./Player.js";
 
 export default class ComputerPlayer extends Player {
   constructor(scene) {
-    const gameWidth = scene.game.config.width;
-    const gameHeight = scene.game.config.height;
-    const halfGameWidth = gameWidth / 2;
-    const halfGameHeight = gameHeight / 2;
+    const worldWidth = scene.physics.world.bounds.width;
+    const worldHeight = scene.physics.world.bounds.height;
+    const halfWorldWidth = worldWidth / 2;
+    const halfWorldHeight = worldHeight / 2;
 
-    super(scene, 0, 0, halfGameWidth, 30);
+    super(scene, 0, 0, halfWorldWidth, 30, 1);
 
     this.decisionInterval = scene.time.addEvent({
       delay: 1000,
@@ -27,8 +27,7 @@ export default class ComputerPlayer extends Player {
         this.spawnTroop(
           parseInt(Math.random() * this.scene.game.config.width, 0),
           50,
-          3,
-          1
+          this.troopVelocityDirection
         );
       }
     }

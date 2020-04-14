@@ -1,6 +1,6 @@
 import Troop from "../TroopBase.js";
 
-class BattleOtterTroop extends Troop {
+class ChickphinTroop extends Troop {
   constructor(config) {
     super({
       ...config,
@@ -9,14 +9,14 @@ class BattleOtterTroop extends Troop {
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 40;
+    this.movementSpeed = 20;
     // </movement stuff>
 
     // <attack stuff>
-    this.health = 50;
-    this.attackRate = 1000;
-    this.attackDamage = 20;
-    this.attackDistance = 30;
+    this.health = 200;
+    this.attackRate = 1500;
+    this.attackDamage = 50;
+    this.attackDistance = 20;
     this.cost = 3;
     // </attack stuff>
 
@@ -28,12 +28,12 @@ class BattleOtterTroop extends Troop {
   }
 }
 
-const STATIC = BattleOtterTroop;
-STATIC.ANIM_KEY_PREFIX = "troop--battle-otter";
-STATIC.NAME = "BattleOtterTroop";
+const STATIC = ChickphinTroop;
+STATIC.ANIM_KEY_PREFIX = "troop--chickphin";
+STATIC.NAME = "ChickphinTroop";
 STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
-  new BattleOtterTroop(config);
+  new ChickphinTroop(config);
 };
 
-export default BattleOtterTroop;
+export default ChickphinTroop;

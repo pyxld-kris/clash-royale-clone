@@ -6,8 +6,21 @@ class BabyCowTroop extends Troop {
       ...config,
       animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
-
     this.setTint(0xffffff);
+
+    // <movement stuff>
+    this.movementSpeed = 60;
+    // </movement stuff>
+
+    // <attack stuff>
+    this.health = 10;
+    this.attackRate = 5;
+    this.attackDamage = 5;
+    this.attackDistance = 20;
+    this.cost = 1;
+    // </attack stuff>
+
+    this.setMaxVelocity(this.movementSpeed);
   }
 
   destroy() {
@@ -18,6 +31,7 @@ class BabyCowTroop extends Troop {
 const STATIC = BabyCowTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--baby-cow";
 STATIC.NAME = "BabyCowTroop";
+STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
   new BabyCowTroop(config);
 };

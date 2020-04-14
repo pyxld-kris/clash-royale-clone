@@ -1,8 +1,7 @@
 import { Phaser, Scene } from "phaser";
 
-import ControlledPlayer from "../classes/ControlledPlayer.js";
-import ComputerPlayer from "../classes/ComputerPlayer.js";
-import Waypoint from "../classes/Waypoint.js";
+import ControlledPlayer from "../classes/player/ControlledPlayer.js";
+import ComputerPlayer from "../classes/player/ComputerPlayer.js";
 
 import WeatherSystem from "../weather";
 
@@ -26,25 +25,33 @@ export default class PlayScene extends Scene {
     const halfGameWidth = gameWidth / 2;
     const halfGameHeight = gameHeight / 2;
 
+    const cardHolderWidth = gameWidth;
+    const cardHolderHeight = 50;
+
     // Set the physics world size
     this.physics.world.setBounds(
       0,
       0,
       this.game.config.width,
-      this.game.config.height
+      this.game.config.height - cardHolderHeight
     );
 
     this.camera = this.cameras.main;
     this.camera.setBounds(
       0,
       0,
+      this.game.config.width,
+      this.game.config.height
+    );
+
+    /*
       this.physics.world.bounds.width,
       this.physics.world.bounds.height
-    );
+    */
 
     // Create background, and do really simple animation
     this.background = this.add
-      .sprite(halfGameWidth, this.game.config.height, "background")
+      .sprite(halfGameWidth, halfGameHeight, "background")
       .setOrigin(0.5, 0.5)
       .setTint(0x228800);
 
@@ -78,31 +85,23 @@ export default class PlayScene extends Scene {
 
     // add these colliders here to the groups instead of
     // in each troop creation for code cleanup.
-    this.physics.add.collider(this.player.troops, this.trees);
-    this.physics.add.collider(this.opponent.troops, this.trees);
+    //this.physics.add.collider(this.player.troops, this.trees);
+    //this.physics.add.collider(this.opponent.troops, this.trees);
     this.physics.add.collider(this.player.troops, this.opponent.troops);
     this.physics.add.collider(this.player.troops, this.player.troops);
     this.physics.add.collider(this.opponent.troops, this.opponent.troops);
+    this.physics.add.collider(this.player.troops, this.river);
+    this.physics.add.collider(this.opponent.troops, this.river);
 
-    // Set up Waypoint and Troop interactions
-    /*
-    this.waypointGroup = this.add.group();
-    this.waypointGroup.addMultiple(Waypoint.pointers);
-    this.physics.add.collider(
-      this.player.troops,
-      this.waypointGroup,
-      (waypoint, troop) => {
-        troop.nextWaypoint();
-      }
-    );
-    this.physics.add.collider(
-      this.opponent.troops,
-      this.waypointGroup,
-      (waypoint, troop) => {
-        troop.nextWaypoint();
-      }
-    );
-    */
+    this.cardHolder = this.add
+      .rectangle(
+        0,
+        gameHeight - cardHolderHeight,
+        cardHolderWidth,
+        cardHolderHeight,
+        0xbbbbbb
+      )
+      .setOrigin(0, 0);
 
     this.weather = new WeatherSystem(this);
   }

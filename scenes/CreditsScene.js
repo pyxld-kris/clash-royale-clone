@@ -8,7 +8,24 @@ const fontStyle = {
   strokeThickness: 2
 };
 
-let CREDITS_STRING = "Code: Dev Launchers\nArt: Dev Launchers";
+let CREDITS_STRING = `
+Code:
+pyxld_kris
+KingCosmicDev
+
+Art:
+pyxld_kris
+ava (dskjsdkmlj)
+guillermo
+calle
+auburn
+otter
+komo
+brian
+
+Special Thanks:
+Original_Hojocat
+`;
 
 export default class CreditsScene extends Scene {
   constructor() {
@@ -19,11 +36,11 @@ export default class CreditsScene extends Scene {
     let centerX = this.cameras.main.centerX;
     let centerY = this.cameras.main.centerY;
     this.add
-      .bitmapText(centerX, centerY - 20, "teeny-tiny-pixls", "Credits", 10)
+      .bitmapText(centerX, 20, "teeny-tiny-pixls", "Credits", 10)
       .setOrigin(0.5, 0.5);
 
     this.add
-      .bitmapText(centerX, centerY, "teeny-tiny-pixls", CREDITS_STRING, 10)
+      .bitmapText(centerX, 30, "teeny-tiny-pixls", CREDITS_STRING, 10)
       .setOrigin(0.5, 0);
 
     this.input.on("pointerdown", () => {

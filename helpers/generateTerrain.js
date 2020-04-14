@@ -43,6 +43,20 @@ function genTerrain(scene) {
     scene.grass.push(new Grass(scene, grassX, grassY));
   }
 
+  // Create the river in the middle of the playing field
+  scene.river = scene.physics.add
+    .existing(
+      scene.add.rectangle(
+        worldWidth / 2,
+        worldHeight / 2,
+        worldWidth / 2,
+        15,
+        0x3333bb
+      ),
+      true
+    )
+    .setOrigin(0.5, 0.5);
+
   // TODO: Move to genTerrain
   // TODO: finish waypoints!
   // Populate some random Waypoints
@@ -57,8 +71,8 @@ function genTerrain(scene) {
     }
     */
     // Waypoint lanes
-    const gameWidth = scene.game.config.width;
-    const gameHeight = scene.game.config.height;
+    const gameWidth = scene.physics.world.bounds.width;
+    const gameHeight = scene.physics.world.bounds.height;
     const oneTenthWidth = gameWidth / 10;
     const oneFifthHeight = gameHeight / 5;
     for (let i = 0; i < 2; i++) {
