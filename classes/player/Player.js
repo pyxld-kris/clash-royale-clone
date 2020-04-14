@@ -69,15 +69,25 @@ class Player {
     return this; // Return this for function chaining
   }
 
-  spawnTroop(x, y, velocityDirection) {
+  // Returns true if troop is spawned, and false otherwise
+  spawnTroop(x, y, velocityDirection, troopClass) {
     // First, let's check if this click falls within our boundaries.
     if (!Phaser.Geom.Rectangle.Contains(this.spawnZone, x, y)) return;
 
-    // get a random card type, in the future this will be dicided by the player.
-    const CardType = cardTypes[parseInt(Math.random() * cardTypes.length, 0)];
+    // get a random card type, in the future this will be decided by the player.
+    let CardType = cardTypes[parseInt(Math.random() * cardTypes.length, 0)];
+
+    // if we passed in an explicit troop type...
+    if (troopClass) {
+      CardType = {
+        name: troopClass.NAME,
+        cost: troopClass.COST,
+        doSpawn: troopClass.doSpawn
+      };
+    }
 
     // Secondly, check if we have enough mana.
-    if (this.manaBank.getManaAmount() < CardType.cost) return;
+    if (this.manaBank.getManaAmount() < CardType.cost) return false;
 
     // then spawn the troop
     CardType.doSpawn({
@@ -90,6 +100,8 @@ class Player {
 
     // and remove mana equal to it's cost.
     this.manaBank.deductMana(CardType.cost);
+
+    return true;
   }
 
   destroy() {}

@@ -9,7 +9,7 @@ class LilDemonTroop extends Troop {
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 60;
+    this.movementSpeed = 50;
     // </movement stuff>
 
     // <attack stuff>

@@ -11,7 +11,7 @@ const fontStyle = {
 let CREDITS_STRING = `
 Code:
 pyxld_kris
-KingCosmicDev
+Austyn (cosmic)
 
 Art:
 pyxld_kris

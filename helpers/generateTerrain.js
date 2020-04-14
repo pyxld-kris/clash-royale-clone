@@ -44,18 +44,44 @@ function genTerrain(scene) {
   }
 
   // Create the river in the middle of the playing field
-  scene.river = scene.physics.add
-    .existing(
-      scene.add.rectangle(
-        worldWidth / 2,
-        worldHeight / 2,
-        worldWidth / 2,
-        15,
-        0x3333bb
-      ),
-      true
-    )
-    .setOrigin(0.5, 0.5);
+  scene.river = scene.add.group();
+  scene.river.add(
+    // Add center
+    scene.physics.add
+      .existing(
+        scene.add.rectangle(
+          worldWidth / 2,
+          worldHeight / 2,
+          worldWidth / 2,
+          15,
+          0x3333bb
+        ),
+        true
+      )
+      .setOrigin(0.5, 0.5),
+
+    // Add left
+    scene.physics.add
+      .existing(
+        scene.add.rectangle(0, worldHeight / 2, worldWidth / 10, 15, 0x3333bb),
+        true
+      )
+      .setOrigin(0, 0.5),
+
+    // Add right
+    scene.physics.add
+      .existing(
+        scene.add.rectangle(
+          worldWidth,
+          worldHeight / 2,
+          worldWidth / 10,
+          15,
+          0x3333bb
+        ),
+        true
+      )
+      .setOrigin(1, 0.5)
+  );
 
   // TODO: Move to genTerrain
   // TODO: finish waypoints!
@@ -71,10 +97,10 @@ function genTerrain(scene) {
     }
     */
     // Waypoint lanes
-    const gameWidth = scene.physics.world.bounds.width;
-    const gameHeight = scene.physics.world.bounds.height;
-    const oneTenthWidth = gameWidth / 10;
-    const oneFifthHeight = gameHeight / 5;
+    const worldWidth = scene.physics.world.bounds.width;
+    const worldHeight = scene.physics.world.bounds.height;
+    const oneTenthWidth = worldWidth / 10;
+    const oneFifthHeight = worldHeight / 5;
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 5; j++) {
         scene.waypoints.push(
@@ -86,6 +112,10 @@ function genTerrain(scene) {
         );
       }
     }
+    // Top middle waypoint
+    new Waypoint(scene, worldWidth / 2, 10);
+    // Bottom middle waypoint
+    new Waypoint(scene, worldWidth / 2, worldHeight - 10);
   } catch (e) {
     console.error(e);
   }

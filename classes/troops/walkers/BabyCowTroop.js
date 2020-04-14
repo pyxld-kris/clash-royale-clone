@@ -9,12 +9,12 @@ class BabyCowTroop extends Troop {
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 60;
+    this.movementSpeed = 50;
     // </movement stuff>
 
     // <attack stuff>
     this.health = 10;
-    this.attackRate = 5;
+    this.attackRate = 200;
     this.attackDamage = 5;
     this.attackDistance = 20;
     this.cost = 1;
@@ -31,7 +31,7 @@ class BabyCowTroop extends Troop {
 const STATIC = BabyCowTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--baby-cow";
 STATIC.NAME = "BabyCowTroop";
-STATIC.COST = 3;
+STATIC.COST = 1;
 STATIC.doSpawn = function(config) {
   new BabyCowTroop(config);
 };

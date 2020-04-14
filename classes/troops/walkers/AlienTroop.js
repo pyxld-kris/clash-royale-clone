@@ -16,7 +16,7 @@ class AlienTroop extends Troop {
     this.health = 10;
     this.attackRate = 1000;
     this.attackDamage = 10;
-    this.attackDistance = 10;
+    this.attackDistance = 20;
     this.cost = 4;
     // </attack stuff>
 

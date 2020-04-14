@@ -14,96 +14,92 @@ export default class PlayScene extends Scene {
   }
 
   create() {
-    // Start UIScene, which will layer on top of PlayScene
-    this.scene.run("UIScene");
+    try {
+      // Start UIScene, which will layer on top of PlayScene
+      this.scene.run("UIScene");
 
-    // helper function to generate our sprite anims
-    genAnims(this);
+      // helper function to generate our sprite anims
+      genAnims(this);
 
-    const gameWidth = this.game.config.width;
-    const gameHeight = this.game.config.height;
-    const halfGameWidth = gameWidth / 2;
-    const halfGameHeight = gameHeight / 2;
+      const gameWidth = this.game.config.width;
+      const gameHeight = this.game.config.height;
+      const halfGameWidth = gameWidth / 2;
+      const halfGameHeight = gameHeight / 2;
 
-    const cardHolderWidth = gameWidth;
-    const cardHolderHeight = 50;
+      this.cardHolderWidth = gameWidth;
+      this.cardHolderHeight = 50;
 
-    // Set the physics world size
-    this.physics.world.setBounds(
-      0,
-      0,
-      this.game.config.width,
-      this.game.config.height - cardHolderHeight
-    );
+      // Set the physics world size
+      this.physics.world.setBounds(
+        0,
+        0,
+        this.game.config.width,
+        this.game.config.height - this.cardHolderHeight
+      );
 
-    this.camera = this.cameras.main;
-    this.camera.setBounds(
-      0,
-      0,
-      this.game.config.width,
-      this.game.config.height
-    );
+      this.camera = this.cameras.main;
+      this.camera.setBounds(
+        0,
+        0,
+        this.game.config.width,
+        this.game.config.height
+      );
 
-    /*
+      /*
       this.physics.world.bounds.width,
       this.physics.world.bounds.height
     */
 
-    // Create background, and do really simple animation
-    this.background = this.add
-      .sprite(halfGameWidth, halfGameHeight, "background")
-      .setOrigin(0.5, 0.5)
-      .setTint(0x228800);
+      // Create background, and do really simple animation
+      this.background = this.add
+        .sprite(halfGameWidth, halfGameHeight, "background")
+        .setOrigin(0.5, 0.5)
+        .setTint(0x228800);
 
-    this.player = new ControlledPlayer(this);
-    this.opponent = new ComputerPlayer(this);
+      this.player = new ControlledPlayer(this);
+      this.opponent = new ComputerPlayer(this);
 
-    this.player.setOpponent(this.opponent);
-    this.opponent.setOpponent(this.player);
+      this.player.setOpponent(this.opponent);
+      this.opponent.setOpponent(this.player);
 
-    // Set up opponent troops attacking player troops
-    this.physics.add.overlap(
-      this.opponent.aggroAreas,
-      this.player.troops,
-      (aggroArea, enemyTroop) => {
-        const thisTroop = aggroArea.troop;
-        thisTroop.initiateAttack(enemyTroop);
-      }
-    );
+      // Set up opponent troops attacking player troops
+      this.physics.add.overlap(
+        this.opponent.aggroAreas,
+        this.player.troops,
+        (aggroArea, enemyTroop) => {
+          const thisTroop = aggroArea.troop;
+          thisTroop.initiateAttack(enemyTroop);
+        }
+      );
 
-    // Set up player troops attacking opponent troops
-    this.physics.add.overlap(
-      this.player.aggroAreas,
-      this.opponent.troops,
-      (aggroArea, enemyTroop) => {
-        const thisTroop = aggroArea.troop;
-        thisTroop.initiateAttack(enemyTroop);
-      }
-    );
+      // Set up player troops attacking opponent troops
+      this.physics.add.overlap(
+        this.player.aggroAreas,
+        this.opponent.troops,
+        (aggroArea, enemyTroop) => {
+          const thisTroop = aggroArea.troop;
+          thisTroop.initiateAttack(enemyTroop);
+        }
+      );
 
-    genTerrain(this);
+      genTerrain(this);
 
-    // add these colliders here to the groups instead of
-    // in each troop creation for code cleanup.
-    //this.physics.add.collider(this.player.troops, this.trees);
-    //this.physics.add.collider(this.opponent.troops, this.trees);
-    this.physics.add.collider(this.player.troops, this.opponent.troops);
-    this.physics.add.collider(this.player.troops, this.player.troops);
-    this.physics.add.collider(this.opponent.troops, this.opponent.troops);
-    this.physics.add.collider(this.player.troops, this.river);
-    this.physics.add.collider(this.opponent.troops, this.river);
+      // add these colliders here to the groups instead of
+      // in each troop creation for code cleanup.
+      //this.physics.add.collider(this.player.troops, this.trees);
+      //this.physics.add.collider(this.opponent.troops, this.trees);
 
-    this.cardHolder = this.add
-      .rectangle(
-        0,
-        gameHeight - cardHolderHeight,
-        cardHolderWidth,
-        cardHolderHeight,
-        0xbbbbbb
-      )
-      .setOrigin(0, 0);
+      //this.physics.add.collider(this.player.troops, this.opponent.troops);
+      //this.physics.add.collider(this.player.troops, this.player.troops);
+      //this.physics.add.collider(this.opponent.troops, this.opponent.troops);
 
-    this.weather = new WeatherSystem(this);
+      this.physics.add.collider(this.player.troops, this.river);
+      this.physics.add.collider(this.opponent.troops, this.river);
+
+      this.weather = new WeatherSystem(this);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   update(time, delta) {}

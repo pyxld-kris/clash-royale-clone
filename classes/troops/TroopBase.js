@@ -51,9 +51,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
 
       // <Aggression zone stuff>
       this.aggroArea = scene.physics.add
-        .existing(
-          scene.add.rectangle(config.x, config.y, 60, 60, 0xff0000, 0.1)
-        )
+        .existing(scene.add.zone(config.x, config.y, 60, 60, 0xff0000, 0.1))
         .setDepth(100);
       this.aggroArea.troop = this;
       // </Aggression zone stuff>
@@ -68,7 +66,6 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
         .setMaxVelocity(30, 30)
         .setBounce(0.5);
 
-      //this.setAcceleration(0, 50 * config.velocityDirection);
       this.getNextWaypoint();
 
       // default starting anim
@@ -89,14 +86,6 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       );
 
       if (nextWaypoint) {
-        /*
-        this.scene.physics.accelerateTo(
-          this,
-          nextWaypoint.x,
-          nextWaypoint.y,
-          this.movementSpeed
-        );
-        */
         this.scene.physics.moveTo(
           this,
           nextWaypoint.x,
@@ -114,10 +103,6 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
             this.getNextWaypoint();
           }
         );
-      } else {
-        // No more waypoints
-        //this.setAcceleration(0, this.movementSpeed * this.velocityDirection);
-        this.setVelocity(0, this.movementSpeed * this.velocityDirection);
       }
       this.currentWaypoint = nextWaypoint;
     } catch (e) {
@@ -153,8 +138,8 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
   damageEnemy(amount) {
     this.scene.tweens.add({
       targets: [this],
-      scaleX: 2,
-      scaleY: 2,
+      scaleX: 1.1 + this.attackDamage * 0.025,
+      scaleY: 1.1 + this.attackDamage * 0.025,
       ease: "Linear",
       duration: 200,
       yoyo: true,
@@ -185,7 +170,6 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
 
       if (distance > this.attackDistance) {
         // We need to move closer to our enemy troop
-        //this.scene.physics.accelerateTo(this, enemyTroop.x, enemyTroop.y, 100);
         this.scene.physics.moveTo(this, enemyTroop.x, enemyTroop.y, 100);
       } else {
         // we're ready to attack
@@ -199,18 +183,8 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
     } else {
       this.enemyTroop = null;
       if (!this.currentWaypoint) {
-        //this.setAcceleration(0, 50 * this.velocityDirection);
         this.getNextWaypoint();
       } else if (this.currentWaypoint) {
-        /*
-        this.scene.physics.accelerateTo(
-          this,
-          this.currentWaypoint.x,
-          this.currentWaypoint.y,
-          this.movementSpeed
-        );
-        */
-
         this.scene.physics.moveTo(
           this,
           this.currentWaypoint.x,
