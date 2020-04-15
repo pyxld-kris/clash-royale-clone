@@ -1,6 +1,5 @@
 import Phaser from "phaser";
 
-import ManaBank from "../ManaBank.js";
 import Tower from "../environment/Tower.js";
 
 import { Walkers } from "../troops";
@@ -56,8 +55,6 @@ class Player {
         towerY + 20 * this.troopVelocityDirection
       )
     ];
-
-    this.manaBank = new ManaBank(scene, towerX + 39, towerY);
 
     this.spawnZone = scene.add
       .zone(spawnZoneX, spawnZoneY, worldWidth, halfWorldHeight, 0x0000ff, 1)

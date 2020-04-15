@@ -9,7 +9,7 @@ class BabyCowTroop extends Troop {
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 50;
+    this.movementSpeed = 20;
     // </movement stuff>
 
     // <attack stuff>

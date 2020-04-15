@@ -1,4 +1,5 @@
 import Player from "./Player.js";
+import ManaBank from "../ManaBank.js";
 
 export default class ComputerPlayer extends Player {
   constructor(scene) {
@@ -9,8 +10,12 @@ export default class ComputerPlayer extends Player {
 
     super(scene, 0, 0, halfWorldWidth, 30, 1);
 
+    // <ManaBank>
+    this.manaBank = new ManaBank(scene, 0, 0, 10, 10, 10);
+    // </ManaBank>
+
     this.decisionInterval = scene.time.addEvent({
-      delay: 1000,
+      delay: 250,
       callback: this.makeDecision,
       callbackScope: this,
       loop: true

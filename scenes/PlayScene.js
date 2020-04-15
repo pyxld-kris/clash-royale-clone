@@ -89,9 +89,9 @@ export default class PlayScene extends Scene {
       //this.physics.add.collider(this.player.troops, this.trees);
       //this.physics.add.collider(this.opponent.troops, this.trees);
 
-      //this.physics.add.collider(this.player.troops, this.opponent.troops);
-      //this.physics.add.collider(this.player.troops, this.player.troops);
-      //this.physics.add.collider(this.opponent.troops, this.opponent.troops);
+      this.physics.add.collider(this.player.troops, this.opponent.troops);
+      this.physics.add.collider(this.player.troops, this.player.troops);
+      this.physics.add.collider(this.opponent.troops, this.opponent.troops);
 
       this.physics.add.collider(this.player.troops, this.river);
       this.physics.add.collider(this.opponent.troops, this.river);

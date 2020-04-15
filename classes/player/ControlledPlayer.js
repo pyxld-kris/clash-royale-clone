@@ -1,5 +1,6 @@
 import Player from "./Player.js";
 import CardArea from "../cards/CardArea.js";
+import ManaBank from "../ManaBank.js";
 
 export default class ControlledPlayer extends Player {
   constructor(scene) {
@@ -10,9 +11,19 @@ export default class ControlledPlayer extends Player {
 
     super(scene, 0, halfWorldHeight, halfWorldWidth, worldHeight - 10, -1);
 
-    // <Player card and UI>
+    // <ManaBank>
     const gameWidth = scene.game.config.width;
     const gameHeight = scene.game.config.height;
+    this.manaBank = new ManaBank(
+      scene,
+      gameWidth / 2,
+      gameHeight - 5,
+      gameWidth,
+      8
+    );
+    // </ManaBank>
+
+    // <Player cards and UI>
     this.cardArea = new CardArea(
       scene,
       0,
@@ -20,7 +31,7 @@ export default class ControlledPlayer extends Player {
       scene.cardHolderWidth,
       scene.cardHolderHeight
     );
-    // </Player card and UI>
+    // </Player cards and UI>
 
     // Handle the player clicking on the play area
     scene.input.on("pointerdown", pointer => {

@@ -9,7 +9,7 @@ class BattleOtterTroop extends Troop {
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 40;
+    this.movementSpeed = 15;
     // </movement stuff>
 
     // <attack stuff>

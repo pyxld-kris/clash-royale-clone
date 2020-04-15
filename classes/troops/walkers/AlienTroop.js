@@ -9,7 +9,7 @@ class AlienTroop extends Troop {
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 40;
+    this.movementSpeed = 17;
     // </movement stuff>
 
     // <attack stuff>

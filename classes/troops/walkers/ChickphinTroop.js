@@ -9,7 +9,7 @@ class ChickphinTroop extends Troop {
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 20;
+    this.movementSpeed = 8;
     // </movement stuff>
 
     // <attack stuff>
@@ -31,7 +31,7 @@ class ChickphinTroop extends Troop {
 const STATIC = ChickphinTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--chickphin";
 STATIC.NAME = "ChickphinTroop";
-STATIC.COST = 3;
+STATIC.COST = 6;
 STATIC.doSpawn = function(config) {
   new ChickphinTroop(config);
 };

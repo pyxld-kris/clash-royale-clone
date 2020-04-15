@@ -1,27 +1,37 @@
+import DisplayBar from "./ui/DisplayBar.js";
 
 class ManaBank {
-  constructor(scene, renderX, renderY) {
-    this.scene = scene;
-    this.manaAmount = 0;
+  constructor(scene, renderX, renderY, width, height) {
+    try {
+      this.scene = scene;
+      this.manaAmount = 2;
+      this.displaying = false;
 
-    this.displayText = scene.add
-      .text(renderX, renderY, this.manaAmount, {
-        fontSize: "8px",
-        color: "blue"
-      })
-      .setOrigin(0.5, 0.5)
-      .setScrollFactor(0)
-      .setDepth(1);
+      if (renderX && renderY) {
+        console.log("creating display bar");
+        this.displaying = true;
+        this.displayBar = new DisplayBar(
+          scene,
+          renderX,
+          renderY,
+          width,
+          height,
+          10,
+          0x0000ff,
+          0x333333
+        );
+        this.renderMana();
+      }
 
-
-    this.renderMana();
-
-    scene.time.addEvent({
-      delay: 1000,
-      loop: true,
-      callback: this.incrementMana,
-      callbackScope: this
-    });
+      scene.time.addEvent({
+        delay: 1000,
+        loop: true,
+        callback: this.incrementMana,
+        callbackScope: this
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   getManaAmount() {
@@ -41,7 +51,13 @@ class ManaBank {
   }
 
   renderMana() {
-    this.displayText.setText(this.manaAmount);
+    try {
+      if (this.displaying) {
+        this.displayBar.setValue(this.manaAmount);
+      }
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   destroy() {

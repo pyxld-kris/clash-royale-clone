@@ -9,7 +9,7 @@ class EvilTroop extends Troop {
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 20;
+    this.movementSpeed = 10;
     // </movement stuff>
 
     // <attack stuff>
@@ -31,7 +31,7 @@ class EvilTroop extends Troop {
 const STATIC = EvilTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--evil";
 STATIC.NAME = "EvilTroop";
-STATIC.COST = 3;
+STATIC.COST = 5;
 STATIC.doSpawn = function(config) {
   new EvilTroop(config);
 };
