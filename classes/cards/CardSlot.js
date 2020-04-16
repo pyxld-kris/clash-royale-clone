@@ -10,6 +10,7 @@ class CardSlot extends Phaser.GameObjects.Container {
     this.hand = hand;
     this.width = 27;
     this.height = 27;
+    this.originalY = y;
 
     this.card = null;
     this.isSelected = false;
@@ -24,9 +25,11 @@ class CardSlot extends Phaser.GameObjects.Container {
     this.add(this.background);
 
     // Make this interactive and respond to clicks
-    this.background.setInteractive().on("pointerup", () => {
-      this.select();
-    });
+    this.background
+      .setInteractive({ useHandCursor: true })
+      .on("pointerup", () => {
+        this.select();
+      });
   }
 
   insertCard(card) {
@@ -46,12 +49,14 @@ class CardSlot extends Phaser.GameObjects.Container {
   select() {
     this.hand.deselectAll();
     this.isSelected = true;
+    this.y = 1;
     this.background.setFillStyle(0xffff00);
     this.hand.setSelectedCardSlot(this);
   }
 
   deselect() {
     this.isSelected = false;
+    this.y = this.originalY;
     this.background.setFillStyle(0x0077bb);
   }
 

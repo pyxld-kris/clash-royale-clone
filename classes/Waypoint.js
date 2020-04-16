@@ -4,13 +4,15 @@ class Waypoint extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, "sapling");
 
+    this.isDestroyed = false;
+
     // Add to rendering engine
     scene.add
       .existing(this)
       .setOrigin(0.5, 0.5)
       .setDepth(10000)
-      .setScale(2)
-      .setAlpha(0);
+      .setScale(0.5);
+    //.setAlpha(0);
 
     // Add to physics engine
     scene.physics.add.existing(this);
@@ -20,8 +22,9 @@ class Waypoint extends Phaser.Physics.Arcade.Sprite {
   }
 
   destroy() {
+    this.isDestroyed = true;
     let waypointIndex = Waypoint.pointers.indexOf(this);
-    Waypoint.pointers = Waypoint.pointers.splice(waypointIndex, 1);
+    Waypoint.pointers.splice(waypointIndex, 1);
 
     super.destroy();
   }

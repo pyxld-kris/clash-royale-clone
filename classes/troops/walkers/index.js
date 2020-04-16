@@ -7,6 +7,10 @@ import BattleOtterTroop from "./BattleOtterTroop";
 import AlienTroop from "./AlienTroop";
 import BabyCowTroop from "./BabyCowTroop";
 import ChickphinTroop from "./ChickphinTroop";
+import MagicPuppyTroop from "./MagicPuppyTroop";
+import QuackerTroop from "./QuackerTroop";
+import ZDogTroop from "./ZDogTroop";
+import ClownGuyTroop from "./ClownGuyTroop";
 
 export default {
   EvilTroop,
@@ -14,5 +18,9 @@ export default {
   BattleOtterTroop,
   AlienTroop,
   BabyCowTroop,
-  ChickphinTroop
+  ChickphinTroop,
+  MagicPuppyTroop,
+  QuackerTroop,
+  ZDogTroop,
+  ClownGuyTroop
 };

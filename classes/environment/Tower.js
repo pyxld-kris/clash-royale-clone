@@ -1,4 +1,5 @@
 import EnvironmentObject from "./EnvironmentObject.js";
+import Waypoint from "../Waypoint.js";
 
 export default class Tower extends EnvironmentObject {
   constructor(scene, owner, x, y) {
@@ -14,6 +15,14 @@ export default class Tower extends EnvironmentObject {
       .setDepth(999999); //.setOffset(0.5, 1);
 
     this.setTint(0x885500);
+
+    // Create waypoints on either side of this towers, so troops can move around them
+    this.waypoints = [
+      new Waypoint(scene, x - 22, y - 10),
+      new Waypoint(scene, x + 22, y - 10),
+      new Waypoint(scene, x - 22, y + 10),
+      new Waypoint(scene, x + 22, y + 10)
+    ];
 
     // Add towers to troop groups to allow troops to attack towers
     this.owner.troops.add(this);
@@ -31,6 +40,10 @@ export default class Tower extends EnvironmentObject {
   }
 
   destroy() {
+    // destroy waypoints
+    for (let waypoint of this.waypoints) {
+      waypoint.destroy();
+    }
     this.isDestroyed = true;
     this.healthDisplay.destroy();
     super.destroy();

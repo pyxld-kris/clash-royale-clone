@@ -24,7 +24,7 @@ class ManaBank {
       }
 
       scene.time.addEvent({
-        delay: 1000,
+        delay: 2500,
         loop: true,
         callback: this.incrementMana,
         callbackScope: this

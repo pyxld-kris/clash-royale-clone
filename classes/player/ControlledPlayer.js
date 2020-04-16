@@ -34,20 +34,22 @@ export default class ControlledPlayer extends Player {
     // </Player cards and UI>
 
     // Handle the player clicking on the play area
-    scene.input.on("pointerdown", pointer => {
-      const playerCardHand = this.cardArea.hand;
-      const currentCard = playerCardHand.selectedCardSlot.card;
-      const troopClass = currentCard.troopClass;
+    this.spawnZone
+      .setInteractive({ useHandCursor: true })
+      .on("pointerdown", pointer => {
+        const playerCardHand = this.cardArea.hand;
+        const currentCard = playerCardHand.selectedCardSlot.card;
+        const troopClass = currentCard.troopClass;
 
-      const spawnedTroop = this.spawnTroop(
-        pointer.worldX,
-        pointer.worldY,
-        this.troopVelocityDirection,
-        troopClass
-      );
+        const spawnedTroop = this.spawnTroop(
+          pointer.worldX,
+          pointer.worldY,
+          this.troopVelocityDirection,
+          troopClass
+        );
 
-      if (spawnedTroop) playerCardHand.drawNextCard();
-    });
+        if (spawnedTroop) playerCardHand.drawNextCard();
+      });
   }
 
   destroy() {

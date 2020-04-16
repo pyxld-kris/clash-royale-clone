@@ -71,7 +71,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       // default starting anim
       this.anims.play(`${this.animKeyPrefix}--front`, true);
 
-      scene.time.delayedCall(10000, this.destroy, null, this);
+      //scene.time.delayedCall(10000, this.destroy, null, this);
     } catch (e) {
       console.error(e);
     }
@@ -141,7 +141,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       scaleX: 1.1 + this.attackDamage * 0.025,
       scaleY: 1.1 + this.attackDamage * 0.025,
       ease: "Linear",
-      duration: 200,
+      duration: 100,
       yoyo: true,
       repeat: 0,
       callbackScope: this
@@ -150,9 +150,18 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
   }
 
   preUpdate(time, delta) {
-    this.anims.play(this.animKeyPrefix + "--back", true);
-    if (this.velocityDirection > 0)
-      this.anims.play(this.animKeyPrefix + "--front", true);
+    let thisVel = this.body.velocity;
+    if (Math.abs(thisVel.x) > Math.abs(thisVel.y)) {
+      // Moving horizontally
+      this.anims.play(this.animKeyPrefix + "--side", true);
+
+      if (thisVel.x > 0) this.flipX = false;
+      else this.flipX = true;
+    } else {
+      if (thisVel.y > 0) this.anims.play(this.animKeyPrefix + "--front", true);
+      else if (thisVel.y < 0)
+        this.anims.play(this.animKeyPrefix + "--back", true);
+    }
 
     this.aggroArea.setPosition(this.x, this.y);
     this.setDepth(this.y);
@@ -182,7 +191,7 @@ class TroopBase extends Phaser.Physics.Arcade.Sprite {
       }
     } else {
       this.enemyTroop = null;
-      if (!this.currentWaypoint) {
+      if (!this.currentWaypoint || this.currentWaypoint.isDestroyed) {
         this.getNextWaypoint();
       } else if (this.currentWaypoint) {
         this.scene.physics.moveTo(

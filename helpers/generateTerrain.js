@@ -83,6 +83,12 @@ function genTerrain(scene) {
       .setOrigin(1, 0.5)
   );
 
+  // Create bridges across the river
+  scene.add.sprite(28, worldHeight / 2, "bridge").setOrigin(0.5, 0.5);
+  scene.add
+    .sprite(worldWidth - 28, worldHeight / 2, "bridge")
+    .setOrigin(0.5, 0.5);
+
   // TODO: Move to genTerrain
   // TODO: finish waypoints!
   // Populate some random Waypoints
@@ -100,22 +106,18 @@ function genTerrain(scene) {
     const worldWidth = scene.physics.world.bounds.width;
     const worldHeight = scene.physics.world.bounds.height;
     const oneTenthWidth = worldWidth / 10;
-    const oneFifthHeight = worldHeight / 5;
+    const oneTwelfthHeight = worldHeight / 12;
     for (let i = 0; i < 2; i++) {
-      for (let j = 0; j < 5; j++) {
+      for (let j = 2; j < 8; j += 1) {
         scene.waypoints.push(
           new Waypoint(
             scene,
             oneTenthWidth * 2 + i * oneTenthWidth * 6,
-            oneFifthHeight / 2 + oneFifthHeight * j
-          )
+            oneTwelfthHeight * 1.5 + oneTwelfthHeight * j
+          ).setTint(0xff0000)
         );
       }
     }
-    // Top middle waypoint
-    new Waypoint(scene, worldWidth / 2, 10);
-    // Bottom middle waypoint
-    new Waypoint(scene, worldWidth / 2, worldHeight - 10);
   } catch (e) {
     console.error(e);
   }

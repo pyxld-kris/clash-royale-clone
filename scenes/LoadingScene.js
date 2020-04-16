@@ -19,6 +19,7 @@ export default class LoadingScene extends Scene {
 
     this.load.image("background", "../assets/background.png");
     this.load.image("tower", "../assets/tower.png");
+    this.load.image("bridge", "../assets/bridge.png");
     this.load.image("building-outer", "../assets/building-outer.png");
     this.load.image("rock", "../assets/rock.png");
     this.load.image("grass", "../assets/grass.png");
@@ -61,6 +62,32 @@ export default class LoadingScene extends Scene {
       frameWidth: 16,
       frameHeight: 19
     });
+    this.load.spritesheet(
+      "troop--magic-puppy",
+      "../assets/troop--magic-puppy.png",
+      {
+        frameWidth: 16,
+        frameHeight: 19
+      }
+    );
+    this.load.spritesheet("troop--quacker", "../assets/troop--quacker.png", {
+      frameWidth: 16,
+      frameHeight: 19
+    });
+    this.load.spritesheet("troop--z-dog", "../assets/troop--z-dog.png", {
+      frameWidth: 18,
+      frameHeight: 19
+    });
+
+    // Clown Guy
+    this.load.spritesheet(
+      "troop--clown-guy",
+      "../assets/troop--clown-guy.png",
+      {
+        frameWidth: 16,
+        frameHeight: 19
+      }
+    );
 
     this.load.spritesheet(
       "troop--chickphin",
