@@ -97,6 +97,24 @@ export default class PlayScene extends Scene {
       this.physics.add.collider(this.opponent.troops, this.river);
 
       this.weather = new WeatherSystem(this);
+
+      // Check win condition whenever towers are destroyed!
+      // Towers emit a "tower-destroyed" event to the scene when destroyed
+      this.events.on("tower-destroyed", () => {
+        // Did this player win?
+        if (this.player.towers.getLength() === 0) {
+          alert("You lose.");
+          this.events.off("tower-destroyed");
+          this.scene.start("TitleScene");
+        }
+
+        // Did the opponent win?
+        else if (this.opponent.towers.getLength() === 0) {
+          alert("You win!");
+          this.events.off("tower-destroyed");
+          this.scene.start("TitleScene");
+        }
+      });
     } catch (e) {
       console.error(e);
     }

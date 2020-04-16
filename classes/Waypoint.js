@@ -11,12 +11,13 @@ class Waypoint extends Phaser.Physics.Arcade.Sprite {
       .existing(this)
       .setOrigin(0.5, 0.5)
       .setDepth(10000)
-      .setScale(0.5)
       .setAlpha(0);
 
     // Add to physics engine
     scene.physics.add.existing(this);
     this.setImmovable(true);
+
+    this.body.setSize(2, 2);
 
     STATIC.pointers.push(this);
   }
@@ -53,8 +54,8 @@ STATIC.getNext = function(x, y, velocityDirection) {
 
     // Check if this waypoint is in the correct direction for this troop (based on player)
     if (
-      (y - thisWaypoint.y > 0 && velocityDirection > 0) ||
-      (y - thisWaypoint.y < 0 && velocityDirection < 0)
+      (y - thisWaypoint.y > 5 && velocityDirection > 0) ||
+      (y - thisWaypoint.y < 5 && velocityDirection < 0)
     )
       continue;
 

@@ -46,6 +46,13 @@ export default class Tower extends EnvironmentObject {
     }
     this.isDestroyed = true;
     this.healthDisplay.destroy();
+
+    // Delay the event so this tower will be destroyed when the vent propegates
+    var scene = this.scene;
+    setTimeout(function() {
+      scene.events.emit("tower-destroyed");
+    }, 500);
+
     super.destroy();
   }
 }

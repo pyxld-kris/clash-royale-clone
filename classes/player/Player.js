@@ -40,7 +40,8 @@ class Player {
     this.aggroAreas = scene.physics.add.group();
 
     //this.tower = new Tower(scene, this, towerX, towerY);
-    this.towers = [
+    this.towers = scene.physics.add.staticGroup();
+    this.towers.addMultiple([
       new Tower(scene, this, towerX, towerY),
       new Tower(
         scene,
@@ -54,7 +55,7 @@ class Player {
         towerX + 50,
         towerY + 20 * this.troopVelocityDirection
       )
-    ];
+    ]);
 
     this.spawnZone = scene.add
       .zone(spawnZoneX, spawnZoneY, worldWidth, halfWorldHeight, 0x0000ff, 1)
