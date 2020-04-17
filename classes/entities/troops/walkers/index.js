@@ -13,18 +13,24 @@ import ZDogTroop from "./ZDogTroop";
 import ClownGuyTroop from "./ClownGuyTroop";
 import ClownLadyTroop from "./ClownLadyTroop";
 import WitchTroop from "./WitchTroop";
+import MamaCowTroop from "./MamaCowTroop";
+import DinoTroop from "./DinoTroop";
+import ValcanoTroop from "./ValcanoTroop";
 
 export default {
   EvilTroop,
-  LilDemonTroop,
-  BattleOtterTroop,
-  AlienTroop,
+  // LilDemonTroop,
+  // BattleOtterTroop,
+  // AlienTroop,
   BabyCowTroop,
-  ChickphinTroop,
-  MagicPuppyTroop,
-  QuackerTroop,
-  ZDogTroop,
-  ClownGuyTroop,
-  ClownLadyTroop,
-  WitchTroop
+  // ChickphinTroop,
+  // MagicPuppyTroop,
+  // QuackerTroop,
+  // ZDogTroop,
+  //ClownGuyTroop,
+  //ClownLadyTroop,
+  // WitchTroop,
+  MamaCowTroop,
+  DinoTroop,
+  ValcanoTroop
 };
