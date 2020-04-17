@@ -1,5 +1,5 @@
 import Player from "./Player.js";
-import CardArea from "../cards/CardArea.js";
+import CardArea from "../entities/cards/CardArea.js";
 import ManaBank from "../ManaBank.js";
 
 export default class ControlledPlayer extends Player {

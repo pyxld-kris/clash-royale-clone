@@ -1,23 +1,25 @@
 import Troop from "../TroopBase.js";
 
+const MIXINS = [];
+
 class BattleOtterTroop extends Troop {
   constructor(config) {
-    super({
+    super(MIXINS, {
       ...config,
       animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 15;
+    this.setMovementSpeed(15);
     // </movement stuff>
 
     // <attack stuff>
-    this.health = 50;
-    this.attackRate = 1000;
-    this.attackDamage = 20;
-    this.attackDistance = 30;
-    this.cost = 3;
+    this.setOverallHealth(50);
+    this.setAttackRate(1000);
+    this.setAttackDamage(20);
+    this.setAttackDistance(30);
+    this.setCost(3);
     // </attack stuff>
 
     this.setMaxVelocity(this.movementSpeed);

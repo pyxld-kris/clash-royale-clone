@@ -88,6 +88,21 @@ export default class LoadingScene extends Scene {
         frameHeight: 19
       }
     );
+    // Clown Lady
+    this.load.spritesheet(
+      "troop--clown-lady",
+      "../assets/troop--clown-lady.png",
+      {
+        frameWidth: 16,
+        frameHeight: 19
+      }
+    );
+
+    // Witch
+    this.load.spritesheet("troop--witch", "../assets/troop--witch.png", {
+      frameWidth: 16,
+      frameHeight: 19
+    });
 
     this.load.spritesheet(
       "troop--chickphin",

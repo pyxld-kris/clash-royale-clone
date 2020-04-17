@@ -1,4 +1,4 @@
-import { Walkers } from "../classes/troops";
+import { Walkers } from "../classes/entities/troops";
 
 // Dynamically populate the animations from our Troop classes
 const animNames = ["npc"]; // Default animation

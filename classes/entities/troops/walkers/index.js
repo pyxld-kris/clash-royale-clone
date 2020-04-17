@@ -11,6 +11,8 @@ import MagicPuppyTroop from "./MagicPuppyTroop";
 import QuackerTroop from "./QuackerTroop";
 import ZDogTroop from "./ZDogTroop";
 import ClownGuyTroop from "./ClownGuyTroop";
+import ClownLadyTroop from "./ClownLadyTroop";
+import WitchTroop from "./WitchTroop";
 
 export default {
   EvilTroop,
@@ -22,5 +24,7 @@ export default {
   MagicPuppyTroop,
   QuackerTroop,
   ZDogTroop,
-  ClownGuyTroop
+  ClownGuyTroop,
+  ClownLadyTroop,
+  WitchTroop
 };

@@ -1,20 +1,26 @@
 import EnvironmentObject from "./EnvironmentObject.js";
-import Waypoint from "../Waypoint.js";
+import Components from "../components";
+
+import Waypoint from "../waypoints/Waypoint.js";
+
+const MIXINS = [Components.HasHealth, Components.CanAttack];
 
 export default class Tower extends EnvironmentObject {
   constructor(scene, owner, x, y) {
-    super(scene, x, y, "tower", true, -6);
+    super(MIXINS, scene, x, y, "tower", true, -6);
     this.owner = owner;
 
-    this.health = 1000;
-
-    this.healthDisplay = scene.add
-      .text(x, y, this.health, { fontSize: "8px", color: "white" })
-      //.bitmapText(x, y, "teeny-tiny-pixls", "S" + this.health, 20)
-      .setOrigin(0.5, 0.5)
-      .setDepth(999999); //.setOffset(0.5, 1);
+    // Add towers to troop groups to allow troops to attack towers
+    this.owner.troops.add(this);
+    this.setImmovable(true);
 
     this.setTint(0x885500);
+
+    this.setOverallHealth(1000);
+    this.initHealthBar(); // From HasHealth component
+
+    this.initAggroArea(30); // From CanAttack component
+    this.owner.aggroAreas.add(this.aggroArea);
 
     // Create waypoints on either side of this towers, so troops can move around them
     this.waypoints = [
@@ -23,20 +29,6 @@ export default class Tower extends EnvironmentObject {
       new Waypoint(scene, x - 22, y + 10),
       new Waypoint(scene, x + 22, y + 10)
     ];
-
-    // Add towers to troop groups to allow troops to attack towers
-    this.owner.troops.add(this);
-    this.body.setImmovable(true);
-  }
-
-  doDamage(amount) {
-    this.health -= amount;
-    this.updateHealth();
-    if (this.health <= 0) this.destroy();
-  }
-
-  updateHealth() {
-    this.healthDisplay.setText(this.health);
   }
 
   destroy() {

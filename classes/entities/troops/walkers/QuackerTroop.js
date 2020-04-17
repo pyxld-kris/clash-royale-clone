@@ -1,23 +1,25 @@
 import Troop from "../TroopBase.js";
 
+const MIXINS = [];
+
 class QuackerTroop extends Troop {
   constructor(config) {
-    super({
+    super(MIXINS, {
       ...config,
       animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 10;
+    this.setMovementSpeed(10);
     // </movement stuff>
 
     // <attack stuff>
-    this.health = 50;
-    this.attackRate = 200;
-    this.attackDamage = 5;
-    this.attackDistance = 20;
-    this.cost = 4;
+    this.setOverallHealth(50);
+    this.setAttackRate(200);
+    this.setAttackDamage(5);
+    this.setAttackDistance(20);
+    this.setCost(4);
     // </attack stuff>
 
     this.setMaxVelocity(this.movementSpeed);

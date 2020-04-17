@@ -54,7 +54,7 @@ export default class DisplayBar extends Phaser.GameObjects.Container {
     const foregroundRatio = parseFloat(this.value) / this.denominator;
     const foregroundWidth = fullBarWidth * foregroundRatio;
     this.foregroundBar.setSize(foregroundWidth, fullBarHeight);
-    this.text.setText(this.value);
+    this.text.setText(Math.floor(this.value));
   }
 
   destroy() {

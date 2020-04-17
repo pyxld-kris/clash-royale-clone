@@ -1,23 +1,25 @@
 import Troop from "../TroopBase.js";
 
-class ZDogTroop extends Troop {
+const MIXINS = [];
+
+class AlienTroop extends Troop {
   constructor(config) {
-    super({
+    super(MIXINS, {
       ...config,
       animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 10;
+    this.setMovementSpeed(17);
     // </movement stuff>
 
     // <attack stuff>
-    this.health = 20;
-    this.attackRate = 1500;
-    this.attackDamage = 20;
-    this.attackDistance = 20;
-    this.cost = 4;
+    this.setOverallHealth(10);
+    this.setAttackRate(1000);
+    this.setAttackDamage(10);
+    this.setAttackDistance(20);
+    this.setCost(4);
     // </attack stuff>
 
     this.setMaxVelocity(this.movementSpeed);
@@ -28,36 +30,36 @@ class ZDogTroop extends Troop {
   }
 }
 
-const STATIC = ZDogTroop;
-STATIC.ANIM_KEY_PREFIX = "troop--z-dog";
-STATIC.NAME = "ZDogTroop";
+const STATIC = AlienTroop;
+STATIC.ANIM_KEY_PREFIX = "troop--alien";
+STATIC.NAME = "AlienTroop";
 STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
-  new ZDogTroop({
+  new AlienTroop({
     ...config,
     x: config.x,
     y: config.y
   });
-  new ZDogTroop({
+  new AlienTroop({
     ...config,
     x: config.x + 10,
     y: config.y + 10
   });
-  new ZDogTroop({
+  new AlienTroop({
     ...config,
     x: config.x - 10,
     y: config.y - 10
   });
-  new ZDogTroop({
+  new AlienTroop({
     ...config,
     x: config.x - 10,
     y: config.y + 10
   });
-  new ZDogTroop({
+  new AlienTroop({
     ...config,
     x: config.x + 10,
     y: config.y - 10
   });
 };
 
-export default ZDogTroop;
+export default AlienTroop;

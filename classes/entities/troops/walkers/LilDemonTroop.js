@@ -1,23 +1,25 @@
 import Troop from "../TroopBase.js";
 
+const MIXINS = [];
+
 class LilDemonTroop extends Troop {
   constructor(config) {
-    super({
+    super(MIXINS, {
       ...config,
       animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 20;
+    this.setMovementSpeed(20);
     // </movement stuff>
 
     // <attack stuff>
-    this.health = 50;
-    this.attackRate = 500;
-    this.attackDamage = 10;
-    this.attackDistance = 30;
-    this.cost = 2;
+    this.setOverallHealth(50);
+    this.setAttackRate(500);
+    this.setAttackDamage(10);
+    this.setAttackDistance(30);
+    this.setCost(2);
     // </attack stuff>
 
     this.setMaxVelocity(this.movementSpeed);

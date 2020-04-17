@@ -17,7 +17,7 @@ class Waypoint extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
     this.setImmovable(true);
 
-    this.body.setSize(2, 2);
+    this.body.setSize(10, 10);
 
     STATIC.pointers.push(this);
   }
@@ -33,7 +33,7 @@ class Waypoint extends Phaser.Physics.Arcade.Sprite {
 
 const STATIC = Waypoint;
 
-const DISTANCE_THRESHOLD = 10;
+const DISTANCE_THRESHOLD = 20;
 STATIC.getNext = function(x, y, velocityDirection) {
   // Returns nearest waypoint, excluding waypoints within
   // a certain threshold distance (prevents returning waypoints

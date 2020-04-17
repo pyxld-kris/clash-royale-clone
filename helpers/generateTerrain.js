@@ -1,10 +1,10 @@
 import Phaser from "phaser";
 
-import Tree from "../classes/environment/Tree.js";
-import TreeTrunk from "../classes/environment/TreeTrunk.js";
-import Rock from "../classes/environment/Rock.js";
-import Grass from "../classes/environment/Grass.js";
-import Waypoint from "../classes/Waypoint.js";
+import Tree from "../classes/entities/environment/Tree.js";
+import TreeTrunk from "../classes/entities/environment/TreeTrunk.js";
+import Rock from "../classes/entities/environment/Rock.js";
+import Grass from "../classes/entities/environment/Grass.js";
+import Waypoint from "../classes/entities/waypoints/Waypoint.js";
 
 function genTerrain(scene) {
   // Create environment objects
@@ -84,24 +84,16 @@ function genTerrain(scene) {
   );
 
   // Create bridges across the river
-  scene.add.sprite(28, worldHeight / 2, "bridge").setOrigin(0.5, 0.5);
+  let bridge = scene.add
+    .sprite(28, worldHeight / 2, "bridge")
+    .setOrigin(0.5, 0.5);
   scene.add
     .sprite(worldWidth - 28, worldHeight / 2, "bridge")
     .setOrigin(0.5, 0.5);
 
-  // TODO: Move to genTerrain
-  // TODO: finish waypoints!
   // Populate some random Waypoints
   try {
     scene.waypoints = [];
-    // Random waypoints
-    /*
-    for (let i = 0; i < 6; i++) {
-      let randX = Phaser.Math.Between(0, scene.game.config.width);
-      let randY = Phaser.Math.Between(0, scene.game.config.height);
-      scene.waypoints.push(new Waypoint(scene, randX, randY));
-    }
-    */
     // Waypoint lanes
     const worldWidth = scene.physics.world.bounds.width;
     const worldHeight = scene.physics.world.bounds.height;
@@ -113,7 +105,7 @@ function genTerrain(scene) {
           new Waypoint(
             scene,
             oneTenthWidth * 2 + i * oneTenthWidth * 6,
-            oneTwelfthHeight * 1.5 + oneTwelfthHeight * j
+            oneTwelfthHeight * 2 + oneTwelfthHeight * j
           ).setTint(0xff0000)
         );
       }

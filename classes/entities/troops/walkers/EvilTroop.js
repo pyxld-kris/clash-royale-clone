@@ -1,23 +1,25 @@
 import Troop from "../TroopBase.js";
 
+const MIXINS = [];
+
 class EvilTroop extends Troop {
   constructor(config) {
-    super({
+    super(MIXINS, {
       ...config,
       animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 10;
+    this.setMovementSpeed(10);
     // </movement stuff>
 
     // <attack stuff>
-    this.health = 200;
-    this.attackRate = 1500;
-    this.attackDamage = 50;
-    this.attackDistance = 20;
-    this.cost = 3;
+    this.setOverallHealth(200);
+    this.setAttackRate(1500);
+    this.setAttackDamage(50);
+    this.setAttackDistance(20);
+    this.setCost(3);
     // </attack stuff>
 
     this.setMaxVelocity(this.movementSpeed);

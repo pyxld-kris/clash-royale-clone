@@ -1,23 +1,25 @@
 import Troop from "../TroopBase.js";
 
-class ClownGuyTroop extends Troop {
+const MIXINS = [];
+
+class ClownLadyTroop extends Troop {
   constructor(config) {
-    super({
+    super(MIXINS, {
       ...config,
       animKeyPrefix: STATIC.ANIM_KEY_PREFIX
     });
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.movementSpeed = 17;
+    this.setMovementSpeed(17);
     // </movement stuff>
 
     // <attack stuff>
-    this.health = 10;
-    this.attackRate = 1000;
-    this.attackDamage = 10;
-    this.attackDistance = 20;
-    this.cost = 4;
+    this.setOverallHealth(10);
+    this.setAttackRate(1000);
+    this.setAttackDamage(10);
+    this.setAttackDistance(20);
+    this.setCost(4);
     // </attack stuff>
 
     this.setMaxVelocity(this.movementSpeed);
@@ -28,16 +30,16 @@ class ClownGuyTroop extends Troop {
   }
 }
 
-const STATIC = ClownGuyTroop;
-STATIC.ANIM_KEY_PREFIX = "troop--clown-guy";
-STATIC.NAME = "ClownGuyTroop";
+const STATIC = ClownLadyTroop;
+STATIC.ANIM_KEY_PREFIX = "troop--clown-lady";
+STATIC.NAME = "ClownLadyTroop";
 STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
-  new ClownGuyTroop({
+  new ClownLadyTroop({
     ...config,
     x: config.x,
     y: config.y
   });
 };
 
-export default ClownGuyTroop;
+export default ClownLadyTroop;

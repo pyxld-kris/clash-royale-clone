@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 
-import Tower from "../environment/Tower.js";
+import Tower from "../entities/environment/Tower.js";
 
-import { Walkers } from "../troops";
+import { Walkers } from "../entities/troops";
 
 // Dynamically populate the card types from our Troop classes
 const cardTypes = [];
