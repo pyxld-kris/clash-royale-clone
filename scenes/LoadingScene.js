@@ -111,7 +111,7 @@ export default class LoadingScene extends Scene {
     });
 
     // Valcano
-    this.load.spritesheet("troop--valcano", "../assets/troop--valcano.png", {
+    this.load.spritesheet("troop--volcano", "../assets/troop--volcano.png", {
       frameWidth: 26,
       frameHeight: 19
     });

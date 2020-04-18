@@ -69,37 +69,41 @@ class Player {
 
   // Returns true if troop is spawned, and false otherwise
   spawnTroop(x, y, velocityDirection, troopClass) {
-    // First, let's check if this click falls within our boundaries.
-    if (!Phaser.Geom.Rectangle.Contains(this.spawnZone, x, y)) return;
+    try {
+      // First, let's check if this click falls within our boundaries.
+      if (!Phaser.Geom.Rectangle.Contains(this.spawnZone, x, y)) return;
 
-    // get a random card type, in the future this will be decided by the player.
-    let CardType = cardTypes[parseInt(Math.random() * cardTypes.length, 0)];
+      // get a random card type, in the future this will be decided by the player.
+      let CardType = cardTypes[parseInt(Math.random() * cardTypes.length, 0)];
 
-    // if we passed in an explicit troop type...
-    if (troopClass) {
-      CardType = {
-        name: troopClass.NAME,
-        cost: troopClass.COST,
-        doSpawn: troopClass.doSpawn
-      };
+      // if we passed in an explicit troop type...
+      if (troopClass) {
+        CardType = {
+          name: troopClass.NAME,
+          cost: troopClass.COST,
+          doSpawn: troopClass.doSpawn
+        };
+      }
+
+      // Secondly, check if we have enough mana.
+      if (this.manaBank.getManaAmount() < CardType.cost) return false;
+      console.log("doing spawn", CardType.name);
+      // then spawn the troop
+      CardType.doSpawn({
+        scene: this.scene,
+        owner: this,
+        x,
+        y,
+        velocityDirection
+      });
+
+      // and remove mana equal to it's cost.
+      this.manaBank.deductMana(CardType.cost);
+      console.log("did spawn");
+      return true;
+    } catch (e) {
+      console.error(e);
     }
-
-    // Secondly, check if we have enough mana.
-    if (this.manaBank.getManaAmount() < CardType.cost) return false;
-
-    // then spawn the troop
-    CardType.doSpawn({
-      scene: this.scene,
-      owner: this,
-      x,
-      y,
-      velocityDirection
-    });
-
-    // and remove mana equal to it's cost.
-    this.manaBank.deductMana(CardType.cost);
-
-    return true;
   }
 
   destroy() {}

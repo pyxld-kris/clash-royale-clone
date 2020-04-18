@@ -2,9 +2,9 @@ import Troop from "../TroopBase.js";
 import BabyCowTroop from "./BabyCowTroop.js";
 
 import Components from "../../components";
-const MIXINS = [Components.CanSpawn];
+const MIXINS = [Components.CanWalk, Components.CanSpawn];
 
-class WitchTroop extends Troop {
+class MamaCowTroop extends Troop {
   constructor(config) {
     super(MIXINS, {
       ...config,
@@ -16,13 +16,23 @@ class WitchTroop extends Troop {
     this.setMovementSpeed(10);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(50);
-    this.setAttackRate(2000);
-    this.setAttackDamage(100);
-    this.setAttackDistance(30);
+    // </health>
+
+    // <effect stuff>
+    this.setAttentionRange(40);
+    this.setEffectRange(40);
+    this.setEffectRate(2000);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(100);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(4);
-    // </attack stuff>
+    // </cost>
 
     // <spawn stuff>
     this.setSpawnRate(3000);
@@ -46,16 +56,16 @@ class WitchTroop extends Troop {
   }
 }
 
-const STATIC = WitchTroop;
+const STATIC = MamaCowTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--mama-cow";
 STATIC.NAME = "MamaCowTroop";
 STATIC.COST = 4;
 STATIC.doSpawn = function(config) {
-  new WitchTroop({
+  new MamaCowTroop({
     ...config,
     x: config.x,
     y: config.y
   });
 };
 
-export default WitchTroop;
+export default MamaCowTroop;

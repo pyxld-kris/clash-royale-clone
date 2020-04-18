@@ -1,6 +1,7 @@
 import Troop from "../TroopBase.js";
 
-const MIXINS = [];
+import Components from "../../components";
+const MIXINS = [Components.CanWalk];
 
 class DinoTroop extends Troop {
   constructor(config) {
@@ -14,13 +15,23 @@ class DinoTroop extends Troop {
     this.setMovementSpeed(20);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(10);
-    this.setAttackRate(200);
-    this.setAttackDamage(5);
-    this.setAttackDistance(20);
+    // </health>
+
+    // <effect stuff>
+    this.setAttentionRange(20);
+    this.setEffectRange(15);
+    this.setEffectRate(200);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(5);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(1);
-    // </attack stuff>
+    // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
   }

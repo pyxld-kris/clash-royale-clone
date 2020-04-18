@@ -4,7 +4,7 @@ import DinoTroop from "./DinoTroop.js";
 import Components from "../../components";
 const MIXINS = [Components.CanSpawn];
 
-class ValcanoTroop extends Troop {
+class VolcanoTroop extends Troop {
   constructor(config) {
     super(MIXINS, {
       ...config,
@@ -12,19 +12,26 @@ class ValcanoTroop extends Troop {
     });
     this.setTint(0xffffff);
 
-    // <movement stuff>
-    this.setMovementSpeed(10);
-    // </movement stuff>
-
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(50);
-    this.setAttackRate(2000);
-    this.setAttackDamage(100);
-    this.setAttackDistance(30);
+    // </health>
+
+    // <effect stuff>
+    this.setAttentionRange(0);
+    this.setEffectRange(0);
+    this.setEffectRate(0);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(100);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(4);
-    // </attack stuff>
+    // </cost>
 
     // <spawn stuff>
+
     this.setSpawnRate(3000);
     this.setSpawnDelay(2000);
     this.setSpawnFunc(() => {
@@ -36,6 +43,7 @@ class ValcanoTroop extends Troop {
         velocityDirection: this.velocityDirection
       });
     });
+
     // </spawn stuff>
 
     this.setMaxVelocity(this.movementSpeed);
@@ -46,16 +54,16 @@ class ValcanoTroop extends Troop {
   }
 }
 
-const STATIC = ValcanoTroop;
-STATIC.ANIM_KEY_PREFIX = "troop--valcano";
-STATIC.NAME = "ValcanoTroop";
+const STATIC = VolcanoTroop;
+STATIC.ANIM_KEY_PREFIX = "troop--volcano";
+STATIC.NAME = "VolcanoTroop";
 STATIC.COST = 4;
 STATIC.doSpawn = function(config) {
-  new ValcanoTroop({
+  new VolcanoTroop({
     ...config,
     x: config.x,
     y: config.y
   });
 };
 
-export default ValcanoTroop;
+export default VolcanoTroop;

@@ -1,6 +1,7 @@
 import Troop from "../TroopBase.js";
 
-const MIXINS = [];
+import Components from "../../components";
+const MIXINS = [Components.CanWalk];
 
 class MagicPuppyTroop extends Troop {
   constructor(config) {

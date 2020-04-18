@@ -9,7 +9,6 @@ const MIXINS = [
   //Components.CanAttack,
   Components.CanBeAttacked,
   Components.CanBeSpawned,
-  Components.CanWalk,
   Components.HasHealth,
 
   Components.HasEffects,
@@ -43,7 +42,8 @@ class TroopBase extends PhysicalEntity {
 
     // <Initialize our own stuff>
     this.owner = config.owner; // A Player object
-    this.setVelocityDirection(config.velocityDirection);
+    this.velocityDirection = config.velocityDirection;
+    //this.setVelocityDirection(config.velocityDirection);
 
     this.setOverallHealth(100);
     //this.initHealthBar(); // From HasHealth component
@@ -55,8 +55,6 @@ class TroopBase extends PhysicalEntity {
 
     this.animKeyPrefix = config.animKeyPrefix;
     this.owner.troops.add(this);
-
-    this.getNextWaypoint();
     // </Initialize our own stuff>
 
     // default starting anim

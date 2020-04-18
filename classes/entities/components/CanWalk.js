@@ -66,6 +66,10 @@ CanWalk.methods = {
 
   /** <Hook into phaser and internal events> */
 
+  _init() {
+    this.getNextWaypoint();
+  },
+
   // Called when an entity with this component is updated
   _preUpdate() {
     let thisVel = this.body.velocity;
