@@ -104,6 +104,24 @@ export default class LoadingScene extends Scene {
       frameHeight: 19
     });
 
+    // Mama Cow
+    this.load.spritesheet("troop--mama-cow", "../assets/troop--mama-cow.png", {
+      frameWidth: 26,
+      frameHeight: 19
+    });
+
+    // Valcano
+    this.load.spritesheet("troop--valcano", "../assets/troop--valcano.png", {
+      frameWidth: 26,
+      frameHeight: 19
+    });
+
+    // Dino
+    this.load.spritesheet("troop--dino", "../assets/troop--dino.png", {
+      frameWidth: 16,
+      frameHeight: 19
+    });
+
     this.load.spritesheet(
       "troop--chickphin",
       "../assets/troop--chickphin.png",
