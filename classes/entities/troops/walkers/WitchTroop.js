@@ -16,13 +16,22 @@ class WitchTroop extends Troop {
     this.setMovementSpeed(10);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(50);
-    this.setAttackRate(2000);
-    this.setAttackDamage(100);
-    this.setAttackDistance(30);
+    // </health>
+
+    // <effect stuff>
+    this.setEffectRate(2000);
+    this.setEffectRange(30);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(100);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(4);
-    // </attack stuff>
+    // </cost>
 
     // <spawn stuff>
     this.setSpawnRate(3000);

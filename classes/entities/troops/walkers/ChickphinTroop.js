@@ -14,13 +14,22 @@ class ChickphinTroop extends Troop {
     this.setMovementSpeed(8);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(200);
-    this.setAttackRate(1500);
-    this.setAttackDamage(50);
-    this.setAttackDistance(20);
+    // </health>
+
+    // <effect stuff>
+    this.setEffectRate(1500);
+    this.setEffectRange(20);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(50);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(3);
-    // </attack stuff>
+    // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
   }

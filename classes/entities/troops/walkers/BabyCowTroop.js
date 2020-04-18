@@ -14,13 +14,22 @@ class BabyCowTroop extends Troop {
     this.setMovementSpeed(20);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(10);
-    this.setAttackRate(200);
-    this.setAttackDamage(5);
-    this.setAttackDistance(20);
+    // </health>
+
+    // <effect stuff>
+    this.setEffectRate(200);
+    this.setEffectRange(20);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(5);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(1);
-    // </attack stuff>
+    // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
   }

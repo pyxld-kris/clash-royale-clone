@@ -1,6 +1,7 @@
 import Waypoint from "../waypoints/Waypoint.js";
 
 var CanWalk = {
+  canMove: true,
   movementSpeed: 100,
   velocityDirection: 1,
 

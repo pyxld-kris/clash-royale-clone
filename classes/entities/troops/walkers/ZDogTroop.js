@@ -14,13 +14,22 @@ class ZDogTroop extends Troop {
     this.setMovementSpeed(10);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(40);
-    this.setAttackRate(1500);
-    this.setAttackDamage(20);
-    this.setAttackDistance(20);
+    // </health>
+
+    // <effect stuff>
+    this.setEffectRate(1500);
+    this.setEffectRange(20);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(20);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(4);
-    // </attack stuff>
+    // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
   }

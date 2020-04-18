@@ -6,11 +6,14 @@ import PhysicalEntity from "../PhysicalEntity.js";
 import Waypoint from "../waypoints/Waypoint.js";
 
 const MIXINS = [
-  Components.CanAttack,
+  //Components.CanAttack,
   Components.CanBeAttacked,
   Components.CanBeSpawned,
   Components.CanWalk,
-  Components.HasHealth
+  Components.HasHealth,
+
+  Components.HasEffects,
+  Components.HasDamageEffect
 ];
 
 class TroopBase extends PhysicalEntity {
@@ -43,10 +46,12 @@ class TroopBase extends PhysicalEntity {
     this.setVelocityDirection(config.velocityDirection);
 
     this.setOverallHealth(100);
-    this.initHealthBar(); // From HasHealth component
+    //this.initHealthBar(); // From HasHealth component
 
-    this.initAggroArea(30); // From CanAttack component
-    this.owner.aggroAreas.add(this.aggroArea);
+    //this.initAggroArea(30); // From CanAttack component
+    //this.owner.aggroAreas.add(this.aggroArea);
+    //this.initEffectArea(30); // From CanAttack component
+    //this.owner.aggroAreas.add(this.effectArea);
 
     this.animKeyPrefix = config.animKeyPrefix;
     this.owner.troops.add(this);

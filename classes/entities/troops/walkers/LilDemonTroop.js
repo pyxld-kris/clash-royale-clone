@@ -14,13 +14,22 @@ class LilDemonTroop extends Troop {
     this.setMovementSpeed(20);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(50);
-    this.setAttackRate(500);
-    this.setAttackDamage(10);
-    this.setAttackDistance(30);
+    // </health>
+
+    // <effect stuff>
+    this.setEffectRate(500);
+    this.setEffectRange(30);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(10);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(2);
-    // </attack stuff>
+    // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
   }

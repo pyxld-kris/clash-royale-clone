@@ -14,13 +14,22 @@ class BattleOtterTroop extends Troop {
     this.setMovementSpeed(15);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(50);
-    this.setAttackRate(1000);
-    this.setAttackDamage(20);
-    this.setAttackDistance(30);
+    // </health>
+
+    // <effect stuff>
+    this.setEffectRate(1000);
+    this.setEffectRange(30);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(20);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(3);
-    // </attack stuff>
+    // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
   }

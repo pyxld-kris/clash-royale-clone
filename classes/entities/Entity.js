@@ -5,6 +5,7 @@ const MIXINS = [];
 export default class Entity extends Phaser.GameObjects.Sprite {
   constructor(extraMixins, scene, x, y, sprite) {
     super(scene, x, y, sprite);
+    this.isInitialized = false;
     this.isDestroyed = false;
 
     scene.add.existing(this);
@@ -17,7 +18,15 @@ export default class Entity extends Phaser.GameObjects.Sprite {
   }
 
   preUpdate(time, delta) {
-    // Call the preUpdate method of each of this entity's components, if it exists
+    // Call the _init method of each of this entity's components, if it exists
+    if (!this.isInitialized) {
+      this.mixins.forEach(component => {
+        if (component._init) component._init.call(this);
+      });
+      this.isInitialized = true;
+    }
+
+    // Call the _preUpdate method of each of this entity's components, if it exists
     this.mixins.forEach(component => {
       if (component._preUpdate) component._preUpdate.call(this, time, delta);
     });
@@ -28,7 +37,7 @@ export default class Entity extends Phaser.GameObjects.Sprite {
   destroy() {
     this.isDestroyed = true;
 
-    // Call the cleanup method of each of this entity's components, if it exists
+    // Call the _destroy method of each of this entity's components, if it exists
     this.mixins.forEach(component => {
       if (component._destroy) component._destroy.call(this);
     });

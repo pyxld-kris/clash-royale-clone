@@ -14,13 +14,22 @@ class AlienTroop extends Troop {
     this.setMovementSpeed(17);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(10);
-    this.setAttackRate(1000);
-    this.setAttackDamage(10);
-    this.setAttackDistance(20);
+    // </health>
+
+    // <effect stuff>
+    this.setEffectRate(1000);
+    this.setEffectRange(20);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(10);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(4);
-    // </attack stuff>
+    // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
   }

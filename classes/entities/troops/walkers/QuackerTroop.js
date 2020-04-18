@@ -14,13 +14,22 @@ class QuackerTroop extends Troop {
     this.setMovementSpeed(10);
     // </movement stuff>
 
-    // <attack stuff>
+    // <health>
     this.setOverallHealth(50);
-    this.setAttackRate(200);
-    this.setAttackDamage(5);
-    this.setAttackDistance(20);
+    // </health>
+
+    // <effect stuff>
+    this.setEffectRate(200);
+    this.setEffectRange(20);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(5);
+    // </damage effect stuff>
+
+    // <cost>
     this.setCost(4);
-    // </attack stuff>
+    // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
   }

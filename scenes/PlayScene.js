@@ -68,7 +68,7 @@ export default class PlayScene extends Scene {
         this.player.troops,
         (aggroArea, enemyTroop) => {
           const thisTroop = aggroArea.troop;
-          thisTroop.initiateAttack(enemyTroop);
+          thisTroop.initiateEffect(enemyTroop);
         }
       );
 
@@ -78,7 +78,7 @@ export default class PlayScene extends Scene {
         this.opponent.troops,
         (aggroArea, enemyTroop) => {
           const thisTroop = aggroArea.troop;
-          thisTroop.initiateAttack(enemyTroop);
+          thisTroop.initiateEffect(enemyTroop);
         }
       );
 

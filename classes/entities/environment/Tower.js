@@ -3,7 +3,12 @@ import Components from "../components";
 
 import Waypoint from "../waypoints/Waypoint.js";
 
-const MIXINS = [Components.HasHealth, Components.CanAttack];
+const MIXINS = [
+  Components.HasHealth,
+
+  Components.HasEffects,
+  Components.HasDamageEffect
+];
 
 export default class Tower extends EnvironmentObject {
   constructor(scene, owner, x, y) {
@@ -12,15 +17,15 @@ export default class Tower extends EnvironmentObject {
 
     // Add towers to troop groups to allow troops to attack towers
     this.owner.troops.add(this);
-    this.setImmovable(true);
+    this.body.setImmovable(true);
 
     this.setTint(0x885500);
 
     this.setOverallHealth(1000);
-    this.initHealthBar(); // From HasHealth component
+    //this.initHealthBar(); // From HasHealth component
 
-    this.initAggroArea(30); // From CanAttack component
-    this.owner.aggroAreas.add(this.aggroArea);
+    //this.initAggroArea(30); // From CanAttack component
+    //this.owner.aggroAreas.add(this.aggroArea);
 
     // Create waypoints on either side of this towers, so troops can move around them
     this.waypoints = [
@@ -37,7 +42,6 @@ export default class Tower extends EnvironmentObject {
       waypoint.destroy();
     }
     this.isDestroyed = true;
-    this.healthDisplay.destroy();
 
     // Delay the event so this tower will be destroyed when the vent propegates
     var scene = this.scene;

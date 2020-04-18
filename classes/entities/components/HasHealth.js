@@ -17,6 +17,7 @@ var HasHealth = {
   // </Setters>
 
   deductHealth(amount) {
+    console.log(this.currentHealth, amount);
     this.currentHealth -= amount;
     this.updateHealthDisplay();
     this.checkIfDead();
@@ -42,6 +43,11 @@ var HasHealth = {
   },
 
   // <Hook into phaser and internal events>
+
+  // Called when an entity with this component is created
+  _init() {
+    this.initHealthBar(); // From HasHealth component
+  },
 
   // Called when an entity with this component is updated
   _preUpdate() {
