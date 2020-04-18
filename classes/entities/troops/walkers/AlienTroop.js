@@ -19,8 +19,9 @@ class AlienTroop extends Troop {
     // </health>
 
     // <effect stuff>
-    this.setEffectRate(1000);
+    this.setAttentionRange(30);
     this.setEffectRange(20);
+    this.setEffectRate(1000);
     // </effect stuff>
 
     // <damage effect stuff>

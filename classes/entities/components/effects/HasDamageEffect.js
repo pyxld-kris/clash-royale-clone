@@ -1,8 +1,17 @@
 import Phaser from "phaser";
 
-var HasDamageEffect = {
-  damageAmount: 10,
+class HasDamageEffect {
+  constructor() {
+    var attributes = {
+      damageAmount: 10
+    };
 
+    Object.assign(this, attributes);
+    Object.assign(this, this.constructor.methods);
+  }
+}
+
+HasDamageEffect.methods = {
   // <Setters>
   setDamageAmount(damageAmount) {
     this.damageAmount = damageAmount;

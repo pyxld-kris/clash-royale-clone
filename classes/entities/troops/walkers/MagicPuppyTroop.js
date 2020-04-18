@@ -19,8 +19,9 @@ class MagicPuppyTroop extends Troop {
     // </health>
 
     // <effect stuff>
-    this.setEffectRate(2000);
+    this.setAttentionRange(60);
     this.setEffectRange(50);
+    this.setEffectRate(2000);
     // </effect stuff>
 
     // <damage effect stuff>

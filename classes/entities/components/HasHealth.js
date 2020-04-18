@@ -1,8 +1,17 @@
-var HasHealth = {
-  currentHealth: 100,
-  overallHealth: 100,
-  healthDisplay: null,
+class HasHealth {
+  constructor() {
+    var attributes = {
+      currentHealth: 100,
+      overallHealth: 100,
+      healthDisplay: null
+    };
 
+    Object.assign(this, attributes);
+    Object.assign(this, this.constructor.methods);
+  }
+}
+
+HasHealth.methods = {
   // <Setters>
   setCurrentHealth(health) {
     this.currentHealth = health;

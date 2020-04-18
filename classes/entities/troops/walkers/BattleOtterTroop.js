@@ -19,8 +19,9 @@ class BattleOtterTroop extends Troop {
     // </health>
 
     // <effect stuff>
-    this.setEffectRate(1000);
+    this.setAttentionRange(40);
     this.setEffectRange(30);
+    this.setEffectRate(1000);
     // </effect stuff>
 
     // <damage effect stuff>

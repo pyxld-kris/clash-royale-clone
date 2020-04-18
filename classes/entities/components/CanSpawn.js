@@ -1,11 +1,21 @@
 //import TroopBase from "../troops/TroopBase.js";
 
-var CanSpawn = {
-  spawnRate: 2000,
-  spawnDelay: 1000,
-  spawnType: null,
-  createTime: null,
-  lastSpawnTime: 0,
+class CanSpawn {
+  constructor() {
+    var attributes = {
+      spawnRate: 2000,
+      spawnDelay: 1000,
+      spawnType: null,
+      createTime: null,
+      lastSpawnTime: 0
+    };
+
+    Object.assign(this, attributes);
+    Object.assign(this, this.constructor.methods);
+  }
+}
+
+CanSpawn.methods = {
   spawnFunc(scene) {
     //new this.spawnType(scene, this.x, this.y);
   },

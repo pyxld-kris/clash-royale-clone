@@ -1,14 +1,23 @@
 import Phaser from "phaser";
 
-var HasEffects = {
-  effects: [], // Holds functions to perform on targets
-  effectRate: 1000,
-  effectRange: 30,
-  attentionRange: 50,
-  lastEffectTime: -1,
-  effectTarget: null,
-  effectArea: null,
+class HasEffects {
+  constructor() {
+    var attributes = {
+      effects: [], // Holds functions to perform on targets
+      effectRate: 1000,
+      effectRange: 30,
+      attentionRange: 50,
+      lastEffectTime: -1,
+      effectTarget: null,
+      attentionArea: null
+    };
 
+    Object.assign(this, attributes);
+    Object.assign(this, this.constructor.methods);
+  }
+}
+
+HasEffects.methods = {
   // <Set up and effect management>
   addEffect(effect) {
     this.effects.push(effect);
@@ -29,15 +38,15 @@ var HasEffects = {
   },
 
   setEffectRange(effectRange) {
-    if (this.effectArea) {
-      this.effectArea
-        .setSize(effectRange * 2, effectRange * 2)
-        .setOrigin(0.5, 0.5);
-      this.effectRange = effectRange;
-    }
+    this.effectRange = effectRange;
   },
 
   setAttentionRange(attentionRange) {
+    if (this.attentionArea) {
+      this.attentionArea
+        .setSize(attentionRange * 2, attentionRange * 2)
+        .setOrigin(0.5, 0.5);
+    }
     this.attentionRange = attentionRange;
   },
 
@@ -50,10 +59,10 @@ var HasEffects = {
   },
   // </Setters>
 
-  initEffectArea(radius) {
-    if (this.effectArea) this.effectArea.destroy(); // Can only be one aggro area
+  initAttentionArea(radius) {
+    if (this.attentionArea) this.attentionArea.destroy(); // Can only be one aggro area
 
-    this.effectArea = this.scene.physics.add
+    this.attentionArea = this.scene.physics.add
       .existing(
         this.scene.add.rectangle(
           this.x,
@@ -66,7 +75,7 @@ var HasEffects = {
       )
       .setOrigin(0.5, 0.5)
       .setDepth(100);
-    this.effectArea.troop = this;
+    this.attentionArea.troop = this;
   },
 
   canDoEffect() {
@@ -93,15 +102,15 @@ var HasEffects = {
 
   // Called when an entity with this component is created
   _init() {
-    this.initEffectArea(this.attentionRange); // From CanAttack component
-    this.owner.aggroAreas.add(this.effectArea);
+    this.initAttentionArea(this.attentionRange); // From CanAttack component
+    this.owner.aggroAreas.add(this.attentionArea);
   },
 
   // Called when an entity with this component is updated
   _preUpdate(time, delta) {
     try {
-      if (this.effectArea) {
-        this.effectArea.setPosition(this.x, this.y);
+      if (this.attentionArea) {
+        this.attentionArea.setPosition(this.x, this.y);
       }
 
       if (this.effectTarget && !this.effectTarget.isDestroyed) {
@@ -143,7 +152,7 @@ var HasEffects = {
 
   // Called when an entity with this component is destroyed
   _destroy() {
-    if (this.effectArea) this.effectArea.destroy();
+    if (this.attentionArea) this.attentionArea.destroy();
   }
 
   /** </Hook into phaser and internal events> */

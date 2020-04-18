@@ -19,8 +19,9 @@ class QuackerTroop extends Troop {
     // </health>
 
     // <effect stuff>
+    this.setAttentionRange(20);
+    this.setEffectRange(15);
     this.setEffectRate(200);
-    this.setEffectRange(20);
     // </effect stuff>
 
     // <damage effect stuff>

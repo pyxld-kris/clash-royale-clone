@@ -21,8 +21,9 @@ class WitchTroop extends Troop {
     // </health>
 
     // <effect stuff>
+    this.setAttentionRange(40);
+    this.setEffectRange(40);
     this.setEffectRate(2000);
-    this.setEffectRange(30);
     // </effect stuff>
 
     // <damage effect stuff>

@@ -19,8 +19,9 @@ class EvilTroop extends Troop {
     // </health>
 
     // <effect stuff>
+    this.setAttentionRange(50);
+    this.setEffectRange(20);
     this.setEffectRate(1500);
-    this.setEffectRange(50);
     // </effect stuff>
 
     // <damage effect stuff>

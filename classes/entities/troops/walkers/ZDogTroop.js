@@ -19,8 +19,9 @@ class ZDogTroop extends Troop {
     // </health>
 
     // <effect stuff>
-    this.setEffectRate(1500);
+    this.setAttentionRange(30);
     this.setEffectRange(20);
+    this.setEffectRate(1500);
     // </effect stuff>
 
     // <damage effect stuff>

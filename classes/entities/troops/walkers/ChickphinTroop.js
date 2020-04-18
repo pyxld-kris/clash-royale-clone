@@ -19,8 +19,9 @@ class ChickphinTroop extends Troop {
     // </health>
 
     // <effect stuff>
-    this.setEffectRate(1500);
+    this.setAttentionRange(40);
     this.setEffectRange(20);
+    this.setEffectRate(1500);
     // </effect stuff>
 
     // <damage effect stuff>

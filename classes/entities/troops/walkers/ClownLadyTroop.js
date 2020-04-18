@@ -19,8 +19,9 @@ class ClownLadyTroop extends Troop {
     // </health>
 
     // <effect stuff>
-    this.setEffectRate(1000);
+    this.setAttentionRange(30);
     this.setEffectRange(20);
+    this.setEffectRate(1000);
     // </effect stuff>
 
     // <damage effect stuff>
@@ -28,7 +29,7 @@ class ClownLadyTroop extends Troop {
     // </damage effect stuff>
 
     // <cost>
-    this.setCost(4);
+    this.setCost(1);
     // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
@@ -42,7 +43,7 @@ class ClownLadyTroop extends Troop {
 const STATIC = ClownLadyTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--clown-lady";
 STATIC.NAME = "ClownLadyTroop";
-STATIC.COST = 3;
+STATIC.COST = 1;
 STATIC.doSpawn = function(config) {
   new ClownLadyTroop({
     ...config,

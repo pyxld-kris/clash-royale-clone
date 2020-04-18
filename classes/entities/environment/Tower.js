@@ -21,11 +21,19 @@ export default class Tower extends EnvironmentObject {
 
     this.setTint(0x885500);
 
+    // <health stuff>
     this.setOverallHealth(1000);
-    //this.initHealthBar(); // From HasHealth component
+    // </health stuff>
 
-    //this.initAggroArea(30); // From CanAttack component
-    //this.owner.aggroAreas.add(this.aggroArea);
+    // <effect stuff>
+    this.setAttentionRange(60);
+    this.setEffectRange(60);
+    this.setEffectRate(1000);
+    // </effect stuff>
+
+    // <damage effect stuff>
+    this.setDamageAmount(20);
+    // </damage effect stuff>
 
     // Create waypoints on either side of this towers, so troops can move around them
     this.waypoints = [

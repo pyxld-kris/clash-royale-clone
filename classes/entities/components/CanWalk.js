@@ -1,12 +1,21 @@
 import Waypoint from "../waypoints/Waypoint.js";
 
-var CanWalk = {
-  canMove: true,
-  movementSpeed: 100,
-  velocityDirection: 1,
+class CanWalk {
+  constructor() {
+    var attributes = {
+      canMove: true,
+      movementSpeed: 100,
+      velocityDirection: 1,
 
-  currentWaypoint: null,
+      currentWaypoint: null
+    };
 
+    Object.assign(this, attributes);
+    Object.assign(this, this.constructor.methods);
+  }
+}
+
+CanWalk.methods = {
   // <Setters>
   setMovementSpeed(movementSpeed) {
     this.movementSpeed = movementSpeed;

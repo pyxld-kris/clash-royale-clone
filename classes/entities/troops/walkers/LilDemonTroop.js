@@ -19,8 +19,9 @@ class LilDemonTroop extends Troop {
     // </health>
 
     // <effect stuff>
+    this.setAttentionRange(30);
+    this.setEffectRange(20);
     this.setEffectRate(500);
-    this.setEffectRange(30);
     // </effect stuff>
 
     // <damage effect stuff>
