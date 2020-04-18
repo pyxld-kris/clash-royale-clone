@@ -26,9 +26,9 @@ export default class Tower extends EnvironmentObject {
     // </health stuff>
 
     // <effect stuff>
-    this.setAttentionRange(60);
+    this.setAttentionRange(50);
     this.setEffectRange(60);
-    this.setEffectRate(1000);
+    this.setEffectRate(1500);
     // </effect stuff>
 
     // <damage effect stuff>

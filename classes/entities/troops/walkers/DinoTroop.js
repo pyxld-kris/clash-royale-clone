@@ -16,17 +16,17 @@ class DinoTroop extends Troop {
     // </movement stuff>
 
     // <health>
-    this.setOverallHealth(10);
+    this.setOverallHealth(30);
     // </health>
 
     // <effect stuff>
     this.setAttentionRange(20);
-    this.setEffectRange(15);
-    this.setEffectRate(200);
+    this.setEffectRange(20);
+    this.setEffectRate(500);
     // </effect stuff>
 
     // <damage effect stuff>
-    this.setDamageAmount(5);
+    this.setDamageAmount(10);
     // </damage effect stuff>
 
     // <cost>

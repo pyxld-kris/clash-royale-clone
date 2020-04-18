@@ -85,7 +85,7 @@ CanWalk.methods = {
         this.anims.play(this.animKeyPrefix + "--back", true);
     }
 
-    if (!this.enemyTroop || this.enemyTroop.isDestroyed) {
+    if (!this.effectTarget || this.effectTarget.isDestroyed) {
       this.enemyTroop = null;
       if (!this.currentWaypoint || this.currentWaypoint.isDestroyed) {
         this.getNextWaypoint();

@@ -21,7 +21,7 @@ class QuackerTroop extends Troop {
 
     // <effect stuff>
     this.setAttentionRange(20);
-    this.setEffectRange(15);
+    this.setEffectRange(20);
     this.setEffectRate(200);
     // </effect stuff>
 

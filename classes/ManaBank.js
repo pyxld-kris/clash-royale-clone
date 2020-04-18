@@ -4,7 +4,7 @@ class ManaBank {
   constructor(scene, renderX, renderY, width, height) {
     try {
       this.scene = scene;
-      this.manaAmount = 2;
+      this.manaAmount = 6;
       this.displaying = false;
 
       if (renderX && renderY) {
