@@ -16,6 +16,8 @@ class CanSpawn {
 }
 
 CanSpawn.methods = {
+  _init() {},
+
   spawnFunc(scene) {
     //new this.spawnType(scene, this.x, this.y);
   },

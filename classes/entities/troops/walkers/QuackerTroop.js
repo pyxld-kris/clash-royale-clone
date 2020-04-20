@@ -1,7 +1,7 @@
 import Troop from "../TroopBase.js";
 
 import Components from "../../components";
-const MIXINS = [Components.CanWalk];
+const MIXINS = [Components.CanFly];
 
 class QuackerTroop extends Troop {
   constructor(config) {
@@ -44,6 +44,7 @@ class QuackerTroop extends Troop {
 const STATIC = QuackerTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--quacker";
 STATIC.NAME = "QuackerTroop";
+STATIC.IS_IN_DECK = true;
 STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
   new QuackerTroop({

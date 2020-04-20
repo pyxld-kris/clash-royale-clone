@@ -44,6 +44,7 @@ class ZDogTroop extends Troop {
 const STATIC = ZDogTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--z-dog";
 STATIC.NAME = "ZDogTroop";
+STATIC.IS_IN_DECK = true;
 STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
   new ZDogTroop({

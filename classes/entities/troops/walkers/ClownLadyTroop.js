@@ -44,6 +44,7 @@ class ClownLadyTroop extends Troop {
 const STATIC = ClownLadyTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--clown-lady";
 STATIC.NAME = "ClownLadyTroop";
+STATIC.IS_IN_DECK = true;
 STATIC.COST = 1;
 STATIC.doSpawn = function(config) {
   new ClownLadyTroop({

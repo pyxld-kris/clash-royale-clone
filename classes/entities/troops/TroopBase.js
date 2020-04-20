@@ -38,7 +38,8 @@ class TroopBase extends PhysicalEntity {
       .setDrag(10)
       .setBounce(0.5)
       .setFriction(10)
-      .setOrigin(0.5, 1);
+      .setOrigin(0.5, 1)
+      .setDepth(this.y);
 
     // <Initialize our own stuff>
     this.owner = config.owner; // A Player object
@@ -48,13 +49,7 @@ class TroopBase extends PhysicalEntity {
     this.setOverallHealth(100);
     //this.initHealthBar(); // From HasHealth component
 
-    //this.initAggroArea(30); // From CanAttack component
-    //this.owner.aggroAreas.add(this.aggroArea);
-    //this.initEffectArea(30); // From CanAttack component
-    //this.owner.aggroAreas.add(this.effectArea);
-
     this.animKeyPrefix = config.animKeyPrefix;
-    this.owner.troops.add(this);
     // </Initialize our own stuff>
 
     // default starting anim

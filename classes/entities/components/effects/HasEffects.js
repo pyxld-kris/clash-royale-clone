@@ -24,7 +24,6 @@ HasEffects.methods = {
   },
 
   doEffects(target) {
-    console.log("doing effect", this.effects.length);
     // affect health of target here
     this.effects.forEach(effect => {
       effect.call(this, this.effectTarget); // Call effect function and pass in target
@@ -64,7 +63,7 @@ HasEffects.methods = {
 
     this.attentionArea = this.scene.physics.add
       .existing(
-        this.scene.add.rectangle(
+        this.scene.add.zone(
           this.x,
           this.y,
           radius * 2,

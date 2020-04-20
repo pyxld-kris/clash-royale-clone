@@ -3,7 +3,7 @@ import Troop from "../TroopBase.js";
 import Components from "../../components";
 const MIXINS = [Components.CanWalk];
 
-class ChickphinTroop extends Troop {
+class TankTroop extends Troop {
   constructor(config) {
     super(MIXINS, {
       ...config,
@@ -12,7 +12,7 @@ class ChickphinTroop extends Troop {
     this.setTint(0xffffff);
 
     // <movement stuff>
-    this.setMovementSpeed(8);
+    this.setMovementSpeed(5);
     // </movement stuff>
 
     // <health>
@@ -20,17 +20,17 @@ class ChickphinTroop extends Troop {
     // </health>
 
     // <effect stuff>
-    this.setAttentionRange(40);
-    this.setEffectRange(20);
-    this.setEffectRate(1500);
+    this.setAttentionRange(50);
+    this.setEffectRange(50);
+    this.setEffectRate(3000);
     // </effect stuff>
 
     // <damage effect stuff>
-    this.setDamageAmount(50);
+    this.setDamageAmount(200);
     // </damage effect stuff>
 
     // <cost>
-    this.setCost(3);
+    this.setCost(6);
     // </cost>
 
     this.setMaxVelocity(this.movementSpeed);
@@ -41,13 +41,13 @@ class ChickphinTroop extends Troop {
   }
 }
 
-const STATIC = ChickphinTroop;
-STATIC.ANIM_KEY_PREFIX = "troop--chickphin";
-STATIC.NAME = "ChickphinTroop";
+const STATIC = TankTroop;
+STATIC.ANIM_KEY_PREFIX = "troop--tank";
+STATIC.NAME = "TankTroop";
 STATIC.IS_IN_DECK = true;
 STATIC.COST = 6;
 STATIC.doSpawn = function(config) {
-  new ChickphinTroop(config);
+  new TankTroop(config);
 };
 
-export default ChickphinTroop;
+export default TankTroop;

@@ -16,6 +16,7 @@ import WitchTroop from "./WitchTroop";
 import MamaCowTroop from "./MamaCowTroop";
 import DinoTroop from "./DinoTroop";
 import VolcanoTroop from "./VolcanoTroop";
+import TankTroop from "./TankTroop";
 
 export default {
   EvilTroop,
@@ -32,5 +33,6 @@ export default {
   WitchTroop,
   MamaCowTroop,
   DinoTroop,
-  VolcanoTroop
+  VolcanoTroop,
+  TankTroop
 };

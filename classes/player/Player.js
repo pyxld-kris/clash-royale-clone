@@ -39,6 +39,10 @@ class Player {
     this.troops = scene.physics.add.group();
     this.aggroAreas = scene.physics.add.group();
 
+    this.walkingTroops = scene.physics.add.group();
+    this.flyingTroops = scene.physics.add.group();
+    this.attentionAreas = scene.physics.add.group();
+
     //this.tower = new Tower(scene, this, towerX, towerY);
     this.towers = scene.physics.add.staticGroup();
     this.towers.addMultiple([
@@ -87,7 +91,7 @@ class Player {
 
       // Secondly, check if we have enough mana.
       if (this.manaBank.getManaAmount() < CardType.cost) return false;
-      console.log("doing spawn", CardType.name);
+
       // then spawn the troop
       CardType.doSpawn({
         scene: this.scene,
@@ -99,7 +103,6 @@ class Player {
 
       // and remove mana equal to it's cost.
       this.manaBank.deductMana(CardType.cost);
-      console.log("did spawn");
       return true;
     } catch (e) {
       console.error(e);

@@ -44,6 +44,7 @@ class LilDemonTroop extends Troop {
 const STATIC = LilDemonTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--lil-demon";
 STATIC.NAME = "LilDemonTroop";
+STATIC.IS_IN_DECK = true;
 STATIC.COST = 2;
 STATIC.doSpawn = function(config) {
   new LilDemonTroop({
