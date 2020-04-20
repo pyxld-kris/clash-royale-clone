@@ -44,6 +44,7 @@ class BabyCowTroop extends Troop {
 const STATIC = BabyCowTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--baby-cow";
 STATIC.NAME = "BabyCowTroop";
+STATIC.IS_IN_DECK = false;
 STATIC.COST = 1;
 STATIC.doSpawn = function(config) {
   new BabyCowTroop(config);

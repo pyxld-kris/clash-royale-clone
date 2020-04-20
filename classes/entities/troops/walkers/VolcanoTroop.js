@@ -2,7 +2,11 @@ import Troop from "../TroopBase.js";
 import DinoTroop from "./DinoTroop.js";
 
 import Components from "../../components";
-const MIXINS = [Components.CanSpawn];
+const MIXINS = [
+  Components.CanSpawn,
+  Components.IsImmovable,
+  Components.HasDamagingInterval
+];
 
 class VolcanoTroop extends Troop {
   constructor(config) {
@@ -57,6 +61,7 @@ class VolcanoTroop extends Troop {
 const STATIC = VolcanoTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--volcano";
 STATIC.NAME = "VolcanoTroop";
+STATIC.IS_IN_DECK = true;
 STATIC.COST = 4;
 STATIC.doSpawn = function(config) {
   new VolcanoTroop({

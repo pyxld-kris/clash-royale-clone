@@ -16,6 +16,13 @@ class CanWalk {
 }
 
 CanWalk.methods = {
+  _init() {
+    this.owner.troops.add(this);
+    this.owner.walkingTroops.add(this);
+
+    this.getNextWaypoint();
+  },
+
   // <Setters>
   setMovementSpeed(movementSpeed) {
     this.movementSpeed = movementSpeed;
@@ -53,7 +60,6 @@ CanWalk.methods = {
           this,
           nextWaypoint,
           () => {
-            console.log("HIT WAYPOINT");
             this.getNextWaypoint();
           }
         );
@@ -65,10 +71,6 @@ CanWalk.methods = {
   },
 
   /** <Hook into phaser and internal events> */
-
-  _init() {
-    this.getNextWaypoint();
-  },
 
   // Called when an entity with this component is updated
   _preUpdate() {

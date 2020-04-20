@@ -59,6 +59,7 @@ class WitchTroop extends Troop {
 const STATIC = WitchTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--witch";
 STATIC.NAME = "WitchTroop";
+STATIC.IS_IN_DECK = true;
 STATIC.COST = 4;
 STATIC.doSpawn = function(config) {
   new WitchTroop({

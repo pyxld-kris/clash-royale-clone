@@ -37,10 +37,10 @@ export default class Tower extends EnvironmentObject {
 
     // Create waypoints on either side of this towers, so troops can move around them
     this.waypoints = [
-      new Waypoint(scene, x - 22, y - 10),
-      new Waypoint(scene, x + 22, y - 10),
-      new Waypoint(scene, x - 22, y + 10),
-      new Waypoint(scene, x + 22, y + 10)
+      new Waypoint(scene, x - 22, y - 10, "tower"),
+      new Waypoint(scene, x + 22, y - 10, "tower"),
+      new Waypoint(scene, x - 22, y + 10, "tower"),
+      new Waypoint(scene, x + 22, y + 10, "tower")
     ];
   }
 

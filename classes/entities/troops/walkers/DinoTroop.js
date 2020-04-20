@@ -44,6 +44,7 @@ class DinoTroop extends Troop {
 const STATIC = DinoTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--dino";
 STATIC.NAME = "DinoTroop";
+STATIC.IS_IN_DECK = false;
 STATIC.COST = 1;
 STATIC.doSpawn = function(config) {
   new DinoTroop(config);
