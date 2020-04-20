@@ -129,16 +129,14 @@ export default class PlayScene extends Scene {
       this.events.on("tower-destroyed", () => {
         // Did this player win?
         if (this.player.towers.getLength() === 0) {
-          alert("You lose.");
           this.events.off("tower-destroyed");
-          this.scene.start("TitleScene");
+          this.scene.start("LoseScene");
         }
 
         // Did the opponent win?
         else if (this.opponent.towers.getLength() === 0) {
-          alert("You win!");
           this.events.off("tower-destroyed");
-          this.scene.start("TitleScene");
+          this.scene.start("WinScene");
         }
       });
     } catch (e) {
