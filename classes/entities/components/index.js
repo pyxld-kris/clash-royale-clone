@@ -4,6 +4,8 @@ import CanSpawn from "./CanSpawn";
 import CanWalk from "./CanWalk";
 import CanFly from "./CanFly";
 import HasHealth from "./HasHealth";
+import HasShadow from "./HasShadow";
+import HasDestructionParticles from "./HasDestructionParticles";
 import HasDamagingInterval from "./HasDamagingInterval";
 import IsImmovable from "./IsImmovable";
 
@@ -18,6 +20,8 @@ export default {
   CanSpawn,
   CanWalk,
   HasHealth,
+  HasShadow,
+  HasDestructionParticles,
   HasDamagingInterval,
   IsImmovable,
 

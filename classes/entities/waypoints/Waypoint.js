@@ -59,8 +59,9 @@ STATIC.getNext = function(x, y, velocityDirection, label) {
 
     // Check if this waypoint is in the correct direction for this troop (based on player)
     if (
-      (y - thisWaypoint.y > 5 && velocityDirection > 0) ||
-      (y - thisWaypoint.y < 5 && velocityDirection < 0)
+      (y + velocityDirection * 10 - thisWaypoint.y > 5 &&
+        velocityDirection > 0) ||
+      (y + velocityDirection * 10 - thisWaypoint.y < 5 && velocityDirection < 0)
     )
       continue;
 

@@ -5,6 +5,7 @@ import Waypoint from "../waypoints/Waypoint.js";
 
 const MIXINS = [
   Components.HasHealth,
+  Components.HasShadow,
 
   Components.HasEffects,
   Components.HasDamageEffect

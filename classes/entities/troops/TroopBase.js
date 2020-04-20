@@ -10,6 +10,8 @@ const MIXINS = [
   Components.CanBeAttacked,
   Components.CanBeSpawned,
   Components.HasHealth,
+  Components.HasShadow,
+  Components.HasDestructionParticles,
 
   Components.HasEffects,
   Components.HasDamageEffect
@@ -29,10 +31,16 @@ class TroopBase extends PhysicalEntity {
     const { scene } = config;
     this.scene = scene;
 
+    this.animKeyPrefix = config.animKeyPrefix;
+    // </Initialize our own stuff>
+
+    // default starting anim
+    this.anims.play(`${this.animKeyPrefix}--front`, true);
+
     // Fix the hitbox of this physics object and set Phaser settings
     const width = this.width;
     const height = this.height;
-    this.setCircle(width / 2 - 4, 4, height / 2 + 1)
+    this.setCircle(width / 4, width / 4, height / 2 + 1)
       .setCollideWorldBounds(true)
       .setMaxVelocity(30, 30)
       .setDrag(10)
@@ -48,12 +56,6 @@ class TroopBase extends PhysicalEntity {
 
     this.setOverallHealth(100);
     //this.initHealthBar(); // From HasHealth component
-
-    this.animKeyPrefix = config.animKeyPrefix;
-    // </Initialize our own stuff>
-
-    // default starting anim
-    this.anims.play(`${this.animKeyPrefix}--front`, true);
   }
 
   preUpdate(time, delta) {

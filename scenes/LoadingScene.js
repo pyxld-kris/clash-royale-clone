@@ -131,6 +131,13 @@ export default class LoadingScene extends Scene {
     circle.fillCircle(10, 10, 10);
     circle.generateTexture("waypoint");
     circle.destroy();
+
+    // Generate particle  texture
+    let particleRect = this.add.graphics();
+    particleRect.fillStyle(0xffffff, 1);
+    particleRect.fillRect(-2, -2, 4, 4);
+    particleRect.generateTexture("particle-rect");
+    particleRect.destroy();
   }
 
   // The rest of this file makes the visual loading bar work!
