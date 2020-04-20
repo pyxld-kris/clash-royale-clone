@@ -23,16 +23,14 @@ jobs:
         node-version: [12.x]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Packages
       run: npm install
-    - name: Build page
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    - name: Build and deploy
       run: |
         parcel build index.html -d 'dist' --public-url ./ # use parcel to build project into /dist directory
         chmod 755 ./ # enable full permissions for root directory
