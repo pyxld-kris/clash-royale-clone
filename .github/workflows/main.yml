@@ -39,7 +39,6 @@ jobs:
         chmod 775 index.html # enable full permissions for index.html file in root directory
         chmod -R 775 dist/ # enable full permissions for dist/ directory and all subdirectories
         cp -r assets dist/play # Copy assets directory to dist directory, so we can load our images and whatnot when the app is run
-        mv ./dist/* ./ # move built files from /dist to root (so github pages can serve up the apps)
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:
