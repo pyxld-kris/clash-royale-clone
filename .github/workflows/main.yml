@@ -34,7 +34,7 @@ jobs:
       run: |
         mkdir dist # create a 'dist' directory 
         mkdir dist/play # create a 'dist' directory 
-        parcel build index.html -d 'dist/play' --public-url ./ # use parcel to build project into /dist directory
+        parcel build index.html -d 'dist' --public-url ./ # use parcel to build project into /dist directory
         chmod 755 ./ # enable full permissions for root directory
         chmod 775 index.html # enable full permissions for index.html file in root directory
         chmod -R 775 dist/ # enable full permissions for dist/ directory and all subdirectories
