@@ -18,7 +18,6 @@ export default class PhysicalEntity extends Phaser.Physics.Arcade.Sprite {
       this.mixins.forEach(component => {
         let componentInstance = new component();
         Object.assign(this, componentInstance);
-        //console.log(this);
       });
     } catch (e) {
       console.log(e);

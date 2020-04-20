@@ -44,6 +44,7 @@ class AlienTroop extends Troop {
 const STATIC = AlienTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--alien";
 STATIC.NAME = "AlienTroop";
+STATIC.IS_IN_DECK = true;
 STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
   new AlienTroop({

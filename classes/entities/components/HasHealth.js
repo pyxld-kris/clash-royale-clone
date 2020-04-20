@@ -26,7 +26,6 @@ HasHealth.methods = {
   // </Setters>
 
   deductHealth(amount) {
-    console.log(this.currentHealth, amount);
     this.currentHealth -= amount;
     this.updateHealthDisplay();
     this.checkIfDead();

@@ -30,12 +30,14 @@ class Deck extends Phaser.GameObjects.Container {
 
   populate() {
     for (let troopClass of Object.values(Walkers)) {
-      const name = troopClass.NAME;
-      const cost = troopClass.COST;
-      const animKeyPrefix = troopClass.ANIM_KEY_PREFIX;
+      if (troopClass.IS_IN_DECK) {
+        const name = troopClass.NAME;
+        const cost = troopClass.COST;
+        const animKeyPrefix = troopClass.ANIM_KEY_PREFIX;
 
-      const thisCard = new Card(this.scene, 0, 0, troopClass);
-      this.add(thisCard);
+        const thisCard = new Card(this.scene, 0, 0, troopClass);
+        this.add(thisCard);
+      }
     }
   }
 

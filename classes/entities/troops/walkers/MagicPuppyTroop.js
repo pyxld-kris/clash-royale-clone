@@ -22,11 +22,11 @@ class MagicPuppyTroop extends Troop {
     // <effect stuff>
     this.setAttentionRange(60);
     this.setEffectRange(50);
-    this.setEffectRate(2000);
+    this.setEffectRate(1000);
     // </effect stuff>
 
     // <damage effect stuff>
-    this.setDamageAmount(100);
+    this.setDamageAmount(10);
     // </damage effect stuff>
 
     // <cost>
@@ -44,6 +44,7 @@ class MagicPuppyTroop extends Troop {
 const STATIC = MagicPuppyTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--magic-puppy";
 STATIC.NAME = "MagicPuppyTroop";
+STATIC.IS_IN_DECK = false;
 STATIC.COST = 4;
 STATIC.doSpawn = function(config) {
   new MagicPuppyTroop({

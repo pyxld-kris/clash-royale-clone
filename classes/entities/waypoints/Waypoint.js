@@ -1,10 +1,11 @@
 import Phaser from "phaser";
 
 class Waypoint extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, label = "default") {
     super(scene, x, y, "sapling");
 
     this.isDestroyed = false;
+    this.label = label;
 
     // Add to rendering engine
     scene.add
@@ -34,7 +35,7 @@ class Waypoint extends Phaser.Physics.Arcade.Sprite {
 const STATIC = Waypoint;
 
 const DISTANCE_THRESHOLD = 20;
-STATIC.getNext = function(x, y, velocityDirection) {
+STATIC.getNext = function(x, y, velocityDirection, label) {
   // Returns nearest waypoint, excluding waypoints within
   // a certain threshold distance (prevents returning waypoints
   // characters are on top of)
@@ -43,6 +44,10 @@ STATIC.getNext = function(x, y, velocityDirection) {
   let nearestWaypoint = null;
   for (let i = 0; i < waypoints.length; i++) {
     let thisWaypoint = waypoints[i];
+
+    // Are we filtering based on a certain criteria?
+    if (label && label !== thisWaypoint.label) continue;
+
     let distance = Phaser.Math.Distance.Between(
       x,
       y,

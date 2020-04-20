@@ -88,13 +88,39 @@ export default class PlayScene extends Scene {
       // in each troop creation for code cleanup.
       //this.physics.add.collider(this.player.troops, this.trees);
       //this.physics.add.collider(this.opponent.troops, this.trees);
-
+      /*
       this.physics.add.collider(this.player.troops, this.opponent.troops);
       this.physics.add.collider(this.player.troops, this.player.troops);
       this.physics.add.collider(this.opponent.troops, this.opponent.troops);
+      */
+      this.physics.add.collider(
+        this.player.walkingTroops,
+        this.opponent.walkingTroops
+      );
+      this.physics.add.collider(
+        this.player.walkingTroops,
+        this.player.walkingTroops
+      );
+      this.physics.add.collider(
+        this.opponent.walkingTroops,
+        this.opponent.walkingTroops
+      );
 
-      this.physics.add.collider(this.player.troops, this.river);
-      this.physics.add.collider(this.opponent.troops, this.river);
+      this.physics.add.collider(
+        this.player.flyingTroops,
+        this.opponent.flyingTroops
+      );
+      this.physics.add.collider(
+        this.player.flyingTroops,
+        this.player.flyingTroops
+      );
+      this.physics.add.collider(
+        this.opponent.flyingTroops,
+        this.opponent.flyingTroops
+      );
+
+      this.physics.add.collider(this.player.walkingTroops, this.river);
+      this.physics.add.collider(this.opponent.walkingTroops, this.river);
 
       this.weather = new WeatherSystem(this);
 

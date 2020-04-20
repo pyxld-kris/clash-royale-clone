@@ -44,6 +44,7 @@ class EvilTroop extends Troop {
 const STATIC = EvilTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--evil";
 STATIC.NAME = "EvilTroop";
+STATIC.IS_IN_DECK = true;
 STATIC.COST = 5;
 STATIC.doSpawn = function(config) {
   new EvilTroop(config);

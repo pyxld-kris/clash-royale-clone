@@ -44,6 +44,7 @@ class BattleOtterTroop extends Troop {
 const STATIC = BattleOtterTroop;
 STATIC.ANIM_KEY_PREFIX = "troop--battle-otter";
 STATIC.NAME = "BattleOtterTroop";
+STATIC.IS_IN_DECK = true;
 STATIC.COST = 3;
 STATIC.doSpawn = function(config) {
   new BattleOtterTroop(config);
