@@ -16,7 +16,7 @@ class Hand extends Phaser.GameObjects.Container {
 
     // Add background
     this.add(
-      scene.add.rectangle(0, 0, width, height, 0xcc9900).setOrigin(0, 0)
+      scene.add.rectangle(0, 0, width, height, 0x553300).setOrigin(0, 0)
     );
 
     // Add card slots

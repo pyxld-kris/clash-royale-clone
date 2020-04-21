@@ -6,6 +6,7 @@ import CanFly from "./CanFly";
 import HasHealth from "./HasHealth";
 import HasShadow from "./HasShadow";
 import HasDestructionParticles from "./HasDestructionParticles";
+import HasDestructionScreenShake from "./HasDestructionScreenShake";
 import HasDamagingInterval from "./HasDamagingInterval";
 import IsImmovable from "./IsImmovable";
 
@@ -22,6 +23,7 @@ export default {
   HasHealth,
   HasShadow,
   HasDestructionParticles,
+  HasDestructionScreenShake,
   HasDamagingInterval,
   IsImmovable,
 

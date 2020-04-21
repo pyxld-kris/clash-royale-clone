@@ -3,6 +3,8 @@ import { Phaser, Scene } from "phaser";
 import ControlledPlayer from "../classes/player/ControlledPlayer.js";
 import ComputerPlayer from "../classes/player/ComputerPlayer.js";
 
+import Components from "../classes/entities/components";
+
 import WeatherSystem from "../weather";
 
 import genAnims from "../helpers/generateAnimations";
@@ -127,16 +129,20 @@ export default class PlayScene extends Scene {
       // Check win condition whenever towers are destroyed!
       // Towers emit a "tower-destroyed" event to the scene when destroyed
       this.events.on("tower-destroyed", () => {
-        // Did this player win?
-        if (this.player.towers.getLength() === 0) {
-          this.events.off("tower-destroyed");
-          this.scene.start("LoseScene");
-        }
+        try {
+          // Did this player win?
+          if (this.player.towers.getLength() === 0) {
+            this.events.off("tower-destroyed");
+            this.scene.start("LoseScene");
+          }
 
-        // Did the opponent win?
-        else if (this.opponent.towers.getLength() === 0) {
-          this.events.off("tower-destroyed");
-          this.scene.start("WinScene");
+          // Did the opponent win?
+          else if (this.opponent.towers.getLength() === 0) {
+            this.events.off("tower-destroyed");
+            this.scene.start("WinScene");
+          }
+        } catch (e) {
+          console.error(e);
         }
       });
     } catch (e) {

@@ -6,6 +6,8 @@ import Waypoint from "../waypoints/Waypoint.js";
 const MIXINS = [
   Components.HasHealth,
   Components.HasShadow,
+  Components.HasDestructionParticles,
+  Components.HasDestructionScreenShake,
 
   Components.HasEffects,
   Components.HasDamageEffect
@@ -56,7 +58,7 @@ export default class Tower extends EnvironmentObject {
     var scene = this.scene;
     setTimeout(function() {
       scene.events.emit("tower-destroyed");
-    }, 500);
+    }, 1500);
 
     super.destroy();
   }
