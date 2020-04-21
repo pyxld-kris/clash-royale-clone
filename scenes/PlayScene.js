@@ -52,6 +52,9 @@ export default class PlayScene extends Scene {
       this.physics.world.bounds.height
     */
 
+      // Reset stuff from previous rounds...
+      Components.HasDestructionParticles.particles = null;
+
       // Create background, and do really simple animation
       this.background = this.add
         .sprite(halfGameWidth, halfGameHeight, "background")
