@@ -20,7 +20,7 @@ class CardSlot extends Phaser.GameObjects.Container {
 
     // Add background
     this.background = scene.add
-      .rectangle(0, 0, this.width, this.height, 0x0077bb)
+      .rectangle(0, 0, this.width, this.height, 0x000000)
       .setOrigin(0, 0);
     this.add(this.background);
 

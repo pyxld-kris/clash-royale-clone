@@ -62,8 +62,21 @@ class Player {
     ]);
 
     this.spawnZone = scene.add
-      .zone(spawnZoneX, spawnZoneY, worldWidth, halfWorldHeight, 0x0000ff, 1)
+      .zone(spawnZoneX, spawnZoneY, worldWidth, halfWorldHeight, 0xff0000, 0)
       .setOrigin(0, 0);
+
+    this.spawnZoneOverlay = scene.add
+      .rectangle(
+        spawnZoneX,
+        spawnZoneY,
+        worldWidth,
+        halfWorldHeight,
+        0xff0000,
+        1
+      )
+      .setOrigin(0, 0)
+      .setDepth(20000)
+      .setAlpha(0);
   }
 
   setOpponent(opponent) {

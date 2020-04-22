@@ -14,7 +14,10 @@ class Deck extends Phaser.GameObjects.Container {
     //this.cards = [];
 
     // Add to rendering engine
-    scene.add.existing(this).setDepth(10000);
+    scene.add
+      .existing(this)
+      .setDepth(10000)
+      .setScale(0.9);
 
     // Add background
     /*

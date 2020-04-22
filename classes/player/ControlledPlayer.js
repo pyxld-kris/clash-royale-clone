@@ -48,7 +48,11 @@ export default class ControlledPlayer extends Player {
           troopClass
         );
 
-        if (spawnedTroop) playerCardHand.drawNextCard();
+        if (spawnedTroop) {
+          this.opponent.spawnZoneOverlay.setAlpha(0); // Hide red area denoting where player can't spawn
+          playerCardHand.drawNextCard();
+          playerCardHand.deselectAll();
+        }
       });
   }
 

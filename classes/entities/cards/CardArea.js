@@ -13,7 +13,7 @@ class CardArea extends Phaser.GameObjects.Container {
       scene.add.rectangle(0, 0, width, height, 0x000000, 0.5).setOrigin(0, 0)
     );
 
-    this.deck = new Deck(scene, 5, 10, 25, 25);
+    this.deck = new Deck(scene, 5, 15, 25, 25);
     this.add(this.deck);
 
     this.hand = new Hand(scene, this.deck, 35, 5, 121, 35);

@@ -12,21 +12,18 @@ class HasShadow {
 HasShadow.methods = {
   // Called when an entity with this component is created, after the entity has been constructed
   _init() {
-    try {
-      this.shadow = this.scene.add.ellipse(
-        this.x,
-        this.y,
-        this.width / 1.1,
-        this.height / 1.25,
-        0x000000,
-        0.25
-      );
-      this.shadow.setDepth(2);
-    } catch (e) {
-      console.error(e);
-    }
+    this.shadow = this.scene.add.ellipse(
+      this.x,
+      this.y,
+      this.width / 1.1,
+      this.height / 1.25,
+      0x000000,
+      0.25
+    );
+    this.shadow.setDepth(2);
   },
 
+  // Called every frame, before this entity updates
   _preUpdate() {
     this.shadow.setPosition(this.x, this.y - 2);
   },
