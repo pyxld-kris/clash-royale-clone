@@ -1,10 +1,5 @@
-import { Walkers } from "../classes/entities/troops";
-
 // Dynamically populate the animations from our Troop classes
 const animNames = ["npc"]; // Default animation
-for (const troopClass of Object.values(Walkers)) {
-  animNames.push(troopClass.ANIM_KEY_PREFIX);
-}
 
 function genAnims(scene) {
   // Create the animations we need from the player spritesheet

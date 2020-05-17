@@ -10,13 +10,7 @@ class TitleScene extends Scene {
     const centerY = this.cameras.main.centerY;
 
     this.add
-      .bitmapText(
-        centerX,
-        centerY - 25,
-        "teeny-tiny-pixls",
-        "Launch\nRoyale",
-        15
-      )
+      .bitmapText(centerX, centerY - 8, "teeny-tiny-pixls", "RPG of Love", 15)
       .setOrigin(0.5, 0.5);
 
     this.add

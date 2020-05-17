@@ -4,8 +4,9 @@ import TitleScene from "../scenes/TitleScene.js";
 import PlayScene from "../scenes/PlayScene.js";
 import UIScene from "../scenes/UIScene.js";
 import CreditsScene from "../scenes/CreditsScene.js";
-import WinScene from "../scenes/WinScene.js";
-import LoseScene from "../scenes/LoseScene.js";
+
+import DropshadowShader from "../shaders/DropshadowShader.js";
+import OutlineShader from "../shaders/OutlineShader.js";
 
 export var config = {
   type: Phaser.AUTO,
@@ -13,15 +14,7 @@ export var config = {
   pixelArt: true,
   zoom: 1,
   backgroundColor: "#000000",
-  scene: [
-    LoadingScene,
-    TitleScene,
-    PlayScene,
-    UIScene,
-    CreditsScene,
-    WinScene,
-    LoseScene
-  ],
+  scene: [LoadingScene, TitleScene, PlayScene, UIScene, CreditsScene],
   physics: {
     default: "arcade",
     arcade: {
@@ -35,11 +28,19 @@ export var config = {
   scale: {
     parent: "game-container",
     mode: Phaser.Scale.FIT,
-    width: 160,
-    height: 265
+    width: 158,
+    height: 83
     /*
     width: 140,
     height: 240
     */
+  },
+
+  callbacks: {
+    //THIS IS THE PART I AM TALKING ABOUT!
+    postBoot: game => {
+      game.renderer.addPipeline("outline", new OutlineShader(game));
+      game.renderer.addPipeline("dropshadow", new DropshadowShader(game));
+    }
   }
 };

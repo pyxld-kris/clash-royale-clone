@@ -1,5 +1,5 @@
 {
-  "name": "clash-royale-clone-4-17-2020",
+  "name": "rpg-of-love",
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
@@ -8,6 +8,7 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "fantasy-name-generator": "2.0.0",
     "phaser": "3.22.0"
   },
   "devDependencies": {
